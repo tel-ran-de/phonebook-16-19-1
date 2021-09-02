@@ -1,0 +1,4 @@
+rootProject.name = 'phonebook-16-19-1'
+
+include('phonebook-api', 'phonebook-ui')
+

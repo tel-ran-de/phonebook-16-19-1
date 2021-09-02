@@ -8,6 +8,9 @@ build/
 !**/src/main/**
 !**/src/test/**
 
+### Angular build lies here ###
+src/main/resources/static
+
 ### STS ###
 .apt_generated
 .classpath
@@ -24,9 +27,6 @@ build/
 *.ipr
 out/
 
-**/.idea
-*/out/
-
 ### NetBeans ###
 /nbproject/private/
 /nbbuild/
@@ -37,5 +37,4 @@ out/
 ### VS Code ###
 .vscode/
 
-### Postgres data ###
-postgres/database
+src/main/resources/application.properties
