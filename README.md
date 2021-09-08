@@ -1,2 +1,1 @@
-Marina Mitunevich
 Mikhail Bolender
