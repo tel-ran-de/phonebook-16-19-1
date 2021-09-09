@@ -1,70 +1,38 @@
 package com.telran.phonebookapi.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "phone")
+@Getter
+@NoArgsConstructor
 public class Phone {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+    @Setter
     private String countryCode;
 
-    @Column(name = "telephone_number")
+    @Setter
     private String telephoneNumber;
 
-    @Column(name = "is_favorite")
+    @Setter
     private boolean isFavorite;
 
     @ManyToOne
-    @JoinColumn(name = "contact_id")
     Contact contact;
 
-    public Phone() {}
-
-    public Phone(String countryCode, String telephoneNumber, boolean isFavorite, Contact contact) {
+    public Phone(@NonNull String countryCode, @NonNull String telephoneNumber, boolean isFavorite, @NonNull Contact contact) {
         this.countryCode = countryCode;
         this.telephoneNumber = telephoneNumber;
         this.isFavorite = isFavorite;
-        this.contact = contact;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public String getCountryCode() {
-        return countryCode;
-    }
-
-    public String getTelephoneNumber() {
-        return telephoneNumber;
-    }
-
-    public boolean isFavorite() {
-        return isFavorite;
-    }
-
-    public Contact getContact() {
-        return contact;
-    }
-
-    public void setCountryCode(String countryCode) {
-        this.countryCode = countryCode;
-    }
-
-    public void setTelephoneNumber(String telephoneNumber) {
-        this.telephoneNumber = telephoneNumber;
-    }
-
-    public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
-    }
-
-    public void setContact(Contact contact) {
         this.contact = contact;
     }
 
@@ -80,4 +48,5 @@ public class Phone {
     public int hashCode() {
         return Objects.hash(id, countryCode, telephoneNumber, isFavorite, contact);
     }
+
 }

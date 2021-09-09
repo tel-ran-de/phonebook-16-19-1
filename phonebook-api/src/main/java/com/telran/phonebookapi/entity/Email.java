@@ -1,60 +1,34 @@
 package com.telran.phonebookapi.entity;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "email")
+@Getter
+@NoArgsConstructor
 public class Email {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "email")
+    @Setter
     private String email;
 
-    @Column(name = "is_favorite")
+    @Setter
     private boolean isFavorite;
 
     @ManyToOne
-    @JoinColumn(name = "contact_id")
     Contact contact;
 
-    public Email() {
-    }
-
-    public Email(String email, boolean isFavorite, Contact contact) {
+    public Email(@NonNull String email, boolean isFavorite, @NonNull Contact contact) {
         this.email = email;
         this.isFavorite = isFavorite;
-        this.contact = contact;
-    }
-
-    public long getId() {
-        return id;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public boolean isFavorite() {
-        return isFavorite;
-    }
-
-    public Contact getContact() {
-        return contact;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public void setFavorite(boolean favorite) {
-        isFavorite = favorite;
-    }
-
-    public void setContact(Contact contact) {
         this.contact = contact;
     }
 
@@ -70,4 +44,5 @@ public class Email {
     public int hashCode() {
         return Objects.hash(id, email, isFavorite, contact);
     }
+
 }

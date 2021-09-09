@@ -10,7 +10,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class EntityTest {
+public class ContactEntityTest {
     @Test
     public void createContactEntityTest() {
 
@@ -33,6 +33,8 @@ public class EntityTest {
         contact.addEmail(email);
 
         assertEquals(Arrays.asList(email), contact.getEmails());
+
+        System.out.println(contact);
 
     }
 
@@ -132,41 +134,6 @@ public class EntityTest {
         contact.setFavourite(newFavourite);
 
         assertEquals(newFavourite, contact.isFavourite());
-
-    }
-
-
-    @Test
-    public void createEmailEntityTest() {
-
-        Contact contact = new Contact("marina", "mitunevich", 30, true, Group.HOME);
-
-        Email email = new Email("marina@mail.ru", true, contact);
-
-        String myEmail = "marina@mail.ru";
-        assertEquals(myEmail, email.getEmail());
-
-    }
-
-    @Test
-    public void createPhoneEntityTest() {
-
-        Contact contact = new Contact("marina", "mitunevich", 30, true, Group.HOME);
-
-        Phone phone = new Phone("Ger", "067896546", false, contact);
-
-        assertEquals(contact, phone.getContact());
-
-    }
-
-    @Test
-    public void createAddressTest() {
-
-        Contact contact = new Contact("marina", "mitunevich", 30, true, Group.HOME);
-
-        Address address = new Address("Germany", "Hamburg", "Ludwig 13", "1957", false, contact);
-
-        assertEquals(contact, address.getContact());
 
     }
 

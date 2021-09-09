@@ -1,32 +1,41 @@
 package com.telran.phonebookapi.entity;
 
+
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+
 @Entity
-@Table(name = "contact")
+@Getter
+@NoArgsConstructor
 public class Contact {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @Column(name = "first_name")
+    @Setter
     private String firstName;
 
-    @Column(name = "last_name")
+    @Setter
     private String lastName;
 
-    @Column(name = "age")
+    @Setter
     private int age;
 
-    @Column(name = "is_favorite")
+    @Setter
     private boolean isFavourite;
 
+    @Setter
     @Enumerated(EnumType.STRING)
-    @Column(name = "group")
+    @Column(name = "contact_group")
     Group group;
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
@@ -38,10 +47,7 @@ public class Contact {
     @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     List<Address> addresses = new ArrayList<>();
 
-    public Contact() {
-    }
-
-    public Contact(String firstName, String lastName, int age, boolean isFavourite, Group group) {
+    public Contact(@NonNull String firstName, @NonNull String lastName, int age, boolean isFavourite, @NonNull Group group) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -61,78 +67,6 @@ public class Contact {
 
     public void addPhone(Phone phone) {
         this.phones.add(phone);
-    }
-
-
-    public long getId() {
-        return id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public int getAge() {
-        return age;
-    }
-
-    public boolean isFavourite() {
-        return isFavourite;
-    }
-
-    public Group getGroup() {
-        return group;
-    }
-
-    public List<Email> getEmails() {
-        return emails;
-    }
-
-    public List<Phone> getPhones() {
-        return phones;
-    }
-
-    public List<Address> getAddresses() {
-        return addresses;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
-
-    public void setFavourite(boolean favourite) {
-        isFavourite = favourite;
-    }
-
-    public void setGroup(Group group) {
-        this.group = group;
-    }
-
-    @Override
-    public String toString() {
-        return "Contact{" +
-                "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", age=" + age +
-                ", isFavourite=" + isFavourite +
-                ", group=" + group +
-                ", emails=" + emails +
-                ", phones=" + phones +
-                ", addresses=" + addresses +
-                '}';
     }
 
     @Override
