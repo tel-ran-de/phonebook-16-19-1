@@ -38,13 +38,13 @@ public class Contact {
     @Column(name = "contact_group")
     Group group;
 
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
     List<Email> emails = new ArrayList<>();
 
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
     List<Phone> phones = new ArrayList<>();
 
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "contact", cascade = CascadeType.REMOVE)
     List<Address> addresses = new ArrayList<>();
 
     public Contact(@NonNull String firstName, @NonNull String lastName, int age, boolean isFavourite, @NonNull Group group) {
