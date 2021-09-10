@@ -1,6 +1,6 @@
 export interface Contact {
   id: number,
-  firsName: string,
+  firstName: string,
   lastName: string,
   age: number,
   isFavorite: boolean,
