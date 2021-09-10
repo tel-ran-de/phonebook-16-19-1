@@ -9,16 +9,12 @@ import {Contact} from "./model/contact";
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const contacts : Contact[] = [
-      { id: 11, firstName: 'Dr Nice', lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home' },
-      { id: 12, firstName: 'Narco', lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home'  },
-      { id: 13, firstName: 'Bombasto', lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home'  },
-      { id: 14, firstName: 'Celeritas', lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home' },
-      { id: 15, firstName: 'Magneta', lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home'  },
-      { id: 16, firstName: 'RubberMan', lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home' },
-      { id: 17, firstName: 'Dynama', lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home' },
-      { id: 18, firstName: 'Dr IQ', lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home'  },
-      { id: 19, firstName: 'Magma', lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home'  },
-      { id: 20, firstName: 'Tornado' , lastName: 'Pupkin', age: 20, isFavorite: true, group: 'home' }
+      { id: 11, firstName: 'Falco', lastName: 'Bergener', age: 27, isFavorite: true, group: 'home' },
+      { id: 12, firstName: 'Maik', lastName: 'Pupkin', age: 30, isFavorite: false, group: 'private' },
+      { id: 13, firstName: 'Cristina', lastName: 'Rohder', age: 20, isFavorite: true, group: 'other'  },
+      { id: 14, firstName: 'Roman', lastName: 'Bergman', age: 40, isFavorite: false, group: 'private' },
+      { id: 15, firstName: 'Cristopfer', lastName: 'Muller', age: 52, isFavorite: true, group: 'home' },
+
     ];
     return {contacts};
   }
