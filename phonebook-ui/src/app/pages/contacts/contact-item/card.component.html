@@ -1,0 +1,15 @@
+<div class="card-body" *ngIf="contact">
+  <h5 class="card-title">
+    <button type="button" class="btn btn-link text-info "
+            routerLink="/details/{{contact.id}}">{{contact.firstName}} {{contact.lastName}}</button>
+  </h5>
+ <ul class="list-group list-group-flush">
+
+  <li class="list-group-item"><a routerLink="" class="card-link" (click)="addEmail()">Add Email</a></li>
+
+   <li class="list-group-item"><a routerLink="" class="card-link" (click)="addPhone()">Add Phone</a></li>
+   <li class="list-group-item"><a routerLink="" class="card-link" (click)="addAddress()">Add Address</a></li>
+  </ul>
+
+</div>
+

@@ -1,0 +1,12 @@
+<div class="row">
+  <div class="col-sm-4  p-3" *ngFor="let contact of contacts">
+    <div class="card">
+
+      <app-card [contact]="contact"></app-card>
+
+      <i id="buttona" class="bi bi-x-circle m-2" (click)="deleteContact(contact)"></i>
+
+    </div>
+  </div>
+</div>
+
