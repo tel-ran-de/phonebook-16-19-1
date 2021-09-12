@@ -7,25 +7,16 @@ import {Contact} from "../../../model/contact";
   templateUrl: './card.component.html',
   styleUrls: ['./card.component.css']
 })
-export class CardComponent implements OnInit {
+export class CardComponent {
+
   @Input() contact?: Contact;
 
-  constructor() {
-  }
-
-  ngOnInit(): void {
-    console.log("ngOnInit worked")
-  }
-
   addEmail(): void {
-    console.log("we added email");
   }
 
   addPhone(): void {
-    console.log("we added phone");
   }
 
   addAddress(): void {
-    console.log("we added address");
   }
 }
