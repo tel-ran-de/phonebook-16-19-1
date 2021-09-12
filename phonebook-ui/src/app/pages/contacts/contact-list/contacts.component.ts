@@ -11,7 +11,7 @@ import {debounceTime} from "rxjs/operators";
 })
 export class ContactsComponent implements OnInit, OnDestroy {
 
-  contacts: Contact [] | undefined;
+  contacts!: Contact [];
   errorStatus : String |  undefined;
   subscriptions: Subscription[] = [];
 
@@ -42,7 +42,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
     const getDeleteContactSubscribe = this.contactService.deleteContact(contact.id)
       .subscribe(_ => {
-        this.getContacts();
+          this.contacts = this.contacts.filter(h => h !== contact);
       },
       () => {
         this.errorStatus = 'something went wrong with delete process';
