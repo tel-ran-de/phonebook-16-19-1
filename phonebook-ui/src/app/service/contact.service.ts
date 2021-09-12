@@ -23,10 +23,10 @@ export class ContactService {
     return this.http.get<Contact[]>(this.phoneBookUrl);
   }
 
-  deleteContact(id: number): Observable<Contact> {
+  deleteContact(id: number): Observable<void>{
 
     const url = `${this.phoneBookUrl}/${id}`;
-    return this.http.delete<Contact>(url, this.httpOptions);
+    return this.http.delete<void>(url, this.httpOptions);
   }
 
 }

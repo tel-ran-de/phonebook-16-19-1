@@ -11,8 +11,8 @@ import {debounceTime} from "rxjs/operators";
 })
 export class ContactsComponent implements OnInit, OnDestroy {
 
-  contacts: Contact [] = [];
-  errorStatus : any | undefined;
+  contacts: Contact [] | undefined;
+  errorStatus : String |  undefined;
   subscriptions: Subscription[] = [];
 
   constructor(private contactService: ContactService) {
