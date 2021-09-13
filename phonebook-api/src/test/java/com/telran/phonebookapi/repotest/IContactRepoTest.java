@@ -1,7 +1,10 @@
 package com.telran.phonebookapi.repotest;
 
 import com.telran.phonebookapi.entity.*;
+import com.telran.phonebookapi.repo.IAddressRepo;
 import com.telran.phonebookapi.repo.IContactRepo;
+import com.telran.phonebookapi.repo.IEmailRepo;
+import com.telran.phonebookapi.repo.IPhoneRepo;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
@@ -10,6 +13,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 @DataJpaTest
 class IContactRepoTest {
@@ -18,13 +22,19 @@ class IContactRepoTest {
     TestEntityManager entityManager;
     @Autowired
     IContactRepo iContactRepo;
+    @Autowired
+    IAddressRepo iAddressRepo;
+    @Autowired
+    IEmailRepo iEmailRepo;
+    @Autowired
+    IPhoneRepo iPhoneRepo;
 
     @Test
     public void addContact() {
 
-        Contact contact = new Contact("Mikhail", "Bolender", 30, true, Group.HOME);
+        Contact contact1 = new Contact("Mikhail", "Bolender", 30, true, Group.HOME);
 
-        entityManager.persist(contact);
+        entityManager.persist(contact1);
 
         entityManager.flush();
         entityManager.clear();
@@ -32,6 +42,38 @@ class IContactRepoTest {
         List<Contact> contacts = iContactRepo.findAll();
 
         assertEquals(1, contacts.size());
+
+    }
+
+    @Test
+    public void addAndDeleteContacts() {
+
+        Contact contact1 = new Contact("Mikhail", "Bolender", 30, true, Group.HOME);
+        Contact contact2 = new Contact("Vasya", "Pupkin", 35, false, Group.PRIVATE);
+
+        entityManager.persist(contact1);
+        entityManager.persist(contact2);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        List<Contact> contacts = iContactRepo.findAll();
+
+        assertEquals(2, contacts.size());
+        assertEquals(1, contact1.getId());
+        assertEquals(2, contact2.getId());
+
+        iContactRepo.deleteById(1L);
+
+        contacts = iContactRepo.findAll();
+
+        assertEquals(1, contacts.size());
+
+        iContactRepo.deleteById(2L);
+
+        contacts = iContactRepo.findAll();
+
+        assertEquals(0, contacts.size());
     }
 
     @Test
@@ -112,9 +154,62 @@ class IContactRepoTest {
         assertEquals(email2.getEmail(), addedEmail2.getEmail());
         assertEquals(email2.getContact(), addedEmail2.getContact());
         assertEquals(email2.getId(), addedEmail2.getId());
+    }
 
+    @Test
+    public void editContactDetails() {
 
-        iContactRepo.deleteById(1L);
+        Contact contact = new Contact("Mikhail", "Bolender", 30, true, Group.HOME);
+
+        Phone phone1 = new Phone("+49", "12345", true, contact);
+        Phone phone2 = new Phone("+35", "123456", true, contact);
+
+        Email email1 = new Email("bolenderm91@gmail.com", true, contact);
+        Email email2 = new Email("stormblade91@gmail.com", true, contact);
+
+        Address address1 = new Address(
+                "Germany",
+                "Berlin",
+                "Südekumzeile",
+                "13591",
+                true, contact);
+        Address address2 = new Address(
+                "Russia",
+                "Moscow",
+                "Lenina",
+                "169300",
+                false, contact);
+
+        contact.addPhone(phone1);
+        contact.addPhone(phone2);
+        contact.addEmail(email1);
+        contact.addEmail(email2);
+        contact.addAddress(address1);
+        contact.addAddress(address2);
+
+        entityManager.persist(contact);
+        entityManager.persist(phone1);
+        entityManager.persist(phone2);
+        entityManager.persist(email1);
+        entityManager.persist(email2);
+        entityManager.persist(address1);
+        entityManager.persist(address2);
+
+        entityManager.flush();
+        entityManager.clear();
+
+        iPhoneRepo.deleteById(1L);
+        assertFalse(iPhoneRepo.existsById(1L));
+        iPhoneRepo.deleteById(2L);
+        assertEquals(0, List.of(iPhoneRepo.findAll()).size());
+
+        iAddressRepo.deleteById(1L);
+        assertEquals(1, List.of(iAddressRepo.findAll()).size());
+        iAddressRepo.deleteById(2L);
+        assertEquals(0, List.of(iAddressRepo.findAll()).size());
+
+        iEmailRepo.deleteById(1L);
+        assertEquals(1, List.of(iEmailRepo.findAll()).size());
     }
 
 }
