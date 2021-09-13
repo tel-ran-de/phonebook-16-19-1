@@ -25,7 +25,7 @@ dependencies {
     compileOnly 'org.projectlombok:lombok:1.18.20'
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
-    runtimeOnly 'org.postgresql:postgresql:42.2.23.jre7'
+//    runtimeOnly 'org.postgresql:postgresql:42.2.23.jre7'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
     testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
