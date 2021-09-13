@@ -40,7 +40,9 @@ export class ContactsComponent implements OnInit, OnDestroy {
 
   deleteContact(contact: Contact): void {
 
-    const getDeleteContactSubscribe = this.contactService.deleteContact(contact.id)
+    this.errorStatus = undefined;
+
+    const deleteContactSubscribe = this.contactService.deleteContact(contact.id)
       .subscribe(_ => {
           this.contacts = this.contacts.filter(h => h !== contact);
       },
@@ -48,7 +50,7 @@ export class ContactsComponent implements OnInit, OnDestroy {
         this.errorStatus = 'something went wrong with delete process';
       });
 
-    this.subscriptions.push(getDeleteContactSubscribe);
+    this.subscriptions.push(deleteContactSubscribe);
   }
 
   ngOnDestroy() {

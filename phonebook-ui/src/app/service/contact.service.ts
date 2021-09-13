@@ -1,6 +1,6 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable, of} from "rxjs";
+import {Observable} from "rxjs";
 import {Contact} from "../model/contact";
 
 @Injectable({
@@ -8,7 +8,7 @@ import {Contact} from "../model/contact";
 })
 export class ContactService {
 
-  readonly phoneBookUrl = 'host/contacts';
+  private readonly phoneBookUrl = 'api/contacts';
 
   httpOptions = {
 
@@ -26,7 +26,7 @@ export class ContactService {
   deleteContact(id: number): Observable<void>{
 
     const url = `${this.phoneBookUrl}/${id}`;
-    return this.http.delete<void>(url, this.httpOptions);
+    return this.http.delete<void>(url);
   }
 
 }
