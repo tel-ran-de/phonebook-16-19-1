@@ -1,0 +1,33 @@
+<div class="col-sm-12 m-2" *ngIf="!contacts">
+
+  <div class="d-flex align-items-center">
+    <strong>Loading...</strong>
+    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
+  </div>
+
+</div>
+
+<div class="col-sm-12 m-2" *ngIf="errorStatus">
+
+  <ngb-alert [dismissible]="false">
+    <strong>Warning! {{errorStatus}}</strong>
+  </ngb-alert>
+
+</div>
+
+<div class="row" *ngIf="contacts">
+
+  <div class="col-sm-4 p-3" *ngFor="let contact of contacts">
+    <div class="card">
+
+      <app-card [contact]="contact"></app-card>
+
+      <i id="buttona" class="bi bi-x-circle m-2" (click)="deleteContact(contact)"></i>
+
+    </div>
+  </div>
+
+</div>
+
+
+

@@ -1,9 +1,5 @@
-package com.telran.phonebookapi.entitytest;
+package com.telran.phonebookapi.entity;
 
-import com.telran.phonebookapi.entity.Address;
-import com.telran.phonebookapi.entity.Contact;
-import com.telran.phonebookapi.entity.Email;
-import com.telran.phonebookapi.entity.Group;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
