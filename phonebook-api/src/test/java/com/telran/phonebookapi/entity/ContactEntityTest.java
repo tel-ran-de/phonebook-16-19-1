@@ -1,11 +1,7 @@
-package com.telran.phonebookapi.entitytest;
+package com.telran.phonebookapi.entity;
 
-import com.telran.phonebookapi.entity.*;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -32,9 +28,7 @@ public class ContactEntityTest {
         Email email = new Email("marina@mail.ru", true, contact);
         contact.addEmail(email);
 
-        assertEquals(Arrays.asList(email), contact.getEmails());
-
-        System.out.println(contact);
+        assertEquals(List.of(email), contact.getEmails());
 
     }
 
@@ -46,7 +40,7 @@ public class ContactEntityTest {
         Phone phone = new Phone("Ger", "067896546", false, contact);
         contact.addPhone(phone);
 
-        assertEquals(Arrays.asList(phone), contact.getPhones());
+        assertEquals(List.of(phone), contact.getPhones());
 
     }
 
@@ -58,7 +52,7 @@ public class ContactEntityTest {
         Address address = new Address("Germany", "Hamburg", "Ludwig 13", "1957", false, contact);
         contact.addAddress(address);
 
-        assertEquals(Arrays.asList(address), contact.getAddresses());
+        assertEquals(List.of(address), contact.getAddresses());
 
     }
 
