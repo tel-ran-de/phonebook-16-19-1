@@ -81,4 +81,19 @@ public class Contact {
     public int hashCode() {
         return Objects.hash(id, firstName, lastName, age, isFavourite, group, emails, phones, addresses);
     }
+
+    @Override
+    public String toString() {
+        return "Contact{" +
+                "id=" + id +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", age=" + age +
+                ", isFavourite=" + isFavourite +
+                ", group=" + group +
+                ", emails=" + emails +
+                ", phones=" + phones +
+                ", addresses=" + addresses +
+                '}';
+    }
 }
