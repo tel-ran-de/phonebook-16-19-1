@@ -61,4 +61,47 @@ class AddressRepoTest {
 
         assertEquals(0, repoAddress.size());
     }
+
+    @Test
+    public void testFindAllByContactId() {
+
+        Contact contact1 = new Contact("Mikhail", "Bolender",
+                30, false, Group.HOME);
+        Contact contact2 = new Contact("Marina", "Mitunevich", 29, true, Group.HOME);
+        Address address1 = new Address(
+                "Germany",
+                "Berlin",
+                "Südekumzeile",
+                "13591",
+                true, contact1);
+        Address address2 = new Address(
+                "Germany",
+                "Berlin",
+                "Südekumzeile",
+                "13591",
+                true, contact1);
+        Address address3 = new Address(
+                "Germany",
+                "Berlin",
+                "Südekumzeile",
+                "13591",
+                true, contact2);
+
+        entityManager.persist(contact1);
+        entityManager.persist(contact2);
+        entityManager.persist(address1);
+        entityManager.persist(address2);
+        entityManager.persist(address3);
+        entityManager.flush();
+        entityManager.clear();
+
+        List<Address> addresses = (List<Address>) iAddressRepo.findAll();
+        List<Address> addressesByContactId = iAddressRepo.findAllByContactId(contact2.getId());
+
+        assertEquals(3, addresses.size());
+        assertEquals(1, addressesByContactId.size());
+
+        assertEquals(contact2.getFirstName(), addressesByContactId.get(0).getContact().getFirstName());
+        assertEquals(contact2.getLastName(), addressesByContactId.get(0).getContact().getLastName());
+    }
 }
