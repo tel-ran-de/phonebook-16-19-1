@@ -1,5 +1,6 @@
 package com.telran.phonebookapi.persistance;
 
+import com.telran.phonebookapi.entity.Address;
 import com.telran.phonebookapi.entity.Contact;
 import com.telran.phonebookapi.entity.Email;
 import com.telran.phonebookapi.entity.Group;
@@ -52,5 +53,33 @@ class EmailRepoTest {
         List<Email> repoAddress = (List<Email>) emailRepo.findAll();
 
         assertEquals(0, repoAddress.size());
+    }
+
+    @Test
+    public void testFindAllByContactId() {
+
+        Contact contact1 = new Contact("Mikhail", "Bolender",
+                30, false, Group.HOME);
+        Contact contact2 = new Contact("Marina", "Mitunevich", 29, true, Group.HOME);
+        Email email1 = new Email("validEmail@save.com", false, contact1);
+        Email email2 = new Email("marina@mail.com", false, contact1);
+        Email email3 = new Email("new@save.com", true, contact2);
+
+        entityManager.persist(contact1);
+        entityManager.persist(contact2);
+        entityManager.persist(email1);
+        entityManager.persist(email2);
+        entityManager.persist(email3);
+        entityManager.flush();
+        entityManager.clear();
+
+        List<Email> emails = (List<Email>) emailRepo.findAll();
+        List<Email> emailsByContactId = emailRepo.findAllByContactId(contact2.getId());
+
+        assertEquals(3, emails.size());
+        assertEquals(1, emailsByContactId.size());
+
+        assertEquals(contact2.getFirstName(), emailsByContactId.get(0).getContact().getFirstName());
+        assertEquals(contact2.getLastName(), emailsByContactId.get(0).getContact().getLastName());
     }
 }
