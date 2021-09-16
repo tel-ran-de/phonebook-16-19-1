@@ -3,6 +3,7 @@ package com.telran.phonebookapi.service;
 import com.telran.phonebookapi.entity.Contact;
 import com.telran.phonebookapi.entity.Group;
 import com.telran.phonebookapi.repo.IContactRepo;
+import com.telran.phonebookapi.service.exceptions.ContactNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
