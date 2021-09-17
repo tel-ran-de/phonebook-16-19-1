@@ -34,8 +34,19 @@ public class AddressServiceTest {
 
     @Test
     public void getAllAddressOfContact_success() {
+
+        when(contactRepo.existsById(1L)).thenReturn(true);
         addressService.getAllAddressOfContact(1L);
         verify(addressRepo, times(1)).findAllByContactId(1L);
+    }
+
+    @Test
+    public void getAllAddressOfContact_contactNotFound() {
+
+        Exception exception = assertThrows(ContactNotFoundException.class,
+                () -> addressService.getAllAddressOfContact(20L));
+        assertNotNull(exception);
+        assertEquals("required contact is not found", exception.getMessage());
     }
 
     @Test
