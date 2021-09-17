@@ -38,6 +38,7 @@ public class AddressServiceTest {
         when(contactRepo.existsById(1L)).thenReturn(true);
         addressService.getAllAddressOfContact(1L);
         verify(addressRepo, times(1)).findAllByContactId(1L);
+
     }
 
     @Test
