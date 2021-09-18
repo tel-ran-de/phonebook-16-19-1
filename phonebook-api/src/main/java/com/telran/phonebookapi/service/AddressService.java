@@ -24,6 +24,9 @@ public class AddressService {
     }
 
     public List<Address> getAllAddressOfContact(long contactId) {
+
+        if(!contactRepo.existsById(contactId))
+         throw new ContactNotFoundException(CONTACT_NOT_FOUND);
         return addressRepo.findAllByContactId(contactId);
     }
 

@@ -1,12 +1,10 @@
 package com.telran.phonebookapi.service;
 
-import com.telran.phonebookapi.entity.Address;
 import com.telran.phonebookapi.entity.Contact;
 import com.telran.phonebookapi.entity.Email;
 import com.telran.phonebookapi.entity.Group;
 import com.telran.phonebookapi.repo.IContactRepo;
 import com.telran.phonebookapi.repo.IEmailRepo;
-import com.telran.phonebookapi.service.exceptions.AddressNotFoundException;
 import com.telran.phonebookapi.service.exceptions.ContactNotFoundException;
 import com.telran.phonebookapi.service.exceptions.EmailNotFountException;
 import org.junit.jupiter.api.Test;
@@ -35,8 +33,18 @@ public class EmailServiceTest {
     @Test
     public void getAllEmailsOfContact_success() {
 
-        emailService.getAllEmailsByContactIDd(1L);
+        when(contactRepo.existsById(1L)).thenReturn(true);
+        emailService.getAllEmailsByContactId(1L);
         verify(emailRepo, times(1)).findAllByContactId(1L);
+    }
+
+    @Test
+    public void getAllEmailsOfContact_contactNotFound() {
+
+        Exception exception = assertThrows(ContactNotFoundException.class,
+                () -> emailService.getAllEmailsByContactId(20L));
+        assertNotNull(exception);
+        assertEquals("required contact is not found", exception.getMessage());
     }
 
     @Test

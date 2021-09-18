@@ -24,8 +24,10 @@ public class EmailService {
         this.contactRepo = contactRepo;
     }
 
-    public List<Email> getAllEmailsByContactIDd(long contactId) {
+    public List<Email> getAllEmailsByContactId(long contactId) {
 
+        if(!contactRepo.existsById(contactId))
+            throw new ContactNotFoundException(CONTACT_NOT_FOUND);
         return emailRepo.findAllByContactId(contactId);
     }
 
