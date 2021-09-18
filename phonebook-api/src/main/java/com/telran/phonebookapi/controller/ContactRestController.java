@@ -27,9 +27,8 @@ public class ContactRestController {
     @GetMapping
     public List<ContactToDisplayDto> getAllContacts() {
 
-        List<ContactToDisplayDto> contacts = contactService.getAllContacts().stream()
+        return contactService.getAllContacts().stream()
                 .map(contactMapper ::toDto).collect(Collectors.toList());
-        return contacts;
     }
 
     @PostMapping
