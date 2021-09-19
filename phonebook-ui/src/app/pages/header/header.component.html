@@ -1,0 +1,8 @@
+<header>
+  <nav class="navbar navbar-light bg-light fixed-top">
+    <a *ngFor="let element of headerElements"
+       class="navbar-brand"
+       [ngClass]="element.class"
+       [routerLink]="element.url">{{element.label}}</a>
+  </nav>
+</header>
