@@ -1,0 +1,31 @@
+<div class="row m-2" *ngIf="contact">
+<div class="col-sm-6" *ngIf="contact" >
+<table class="table">
+  <thead>
+
+  <tr>
+    <th scope="col">FirstName</th>
+    <th scope="col">LastName</th>
+    <th scope="col">Age</th>
+  </tr>
+  </thead>
+
+  <tbody>
+  <tr>
+    <td>{{contact.firstName}}</td>
+    <td>{{contact.lastName}}</td>
+    <td>{{contact.age}}</td>
+  </tr>
+  </tbody>
+
+</table>
+
+</div>
+
+<div class="col-sm-6">
+  <button type="button" class="btn btn-light" (click)="open()"><i class="bi bi-pencil-square"></i>Edit</button>
+</div>
+
+</div>
+
+

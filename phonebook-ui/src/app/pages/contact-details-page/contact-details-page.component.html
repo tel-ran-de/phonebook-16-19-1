@@ -1,0 +1,32 @@
+<div *ngIf="contact">
+  <ngb-accordion #acc="ngbAccordion" activeIds="ngb-panel-0">
+    <ngb-panel>
+
+      <ng-template ngbPanelTitle>
+        <span><h2>{{contact.firstName | uppercase}} Details</h2></span>
+      </ng-template>
+
+      <ng-template ngbPanelContent>
+
+        <div class="col-sm-12">
+          <app-contact-detail [contact]="contact"></app-contact-detail>
+        </div>
+
+        <div class="col-sm-12">
+          <app-contact-emails></app-contact-emails>
+        </div>
+
+        <div class="col-sm-12">
+          <app-contact-addresses></app-contact-addresses>
+        </div>
+
+        <div class="col-sm-12">
+          <app-contact-phones></app-contact-phones>
+        </div>
+
+      </ng-template>
+
+    </ngb-panel>
+  </ngb-accordion>
+
+</div>
