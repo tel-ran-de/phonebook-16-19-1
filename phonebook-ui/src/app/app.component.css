@@ -1,0 +1,7 @@
+.main-column {
+  min-height: calc(100vh - 70px);
+}
+
+.mt-75px {
+  margin-top: 75px;
+}

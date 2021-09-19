@@ -1,14 +1,16 @@
-
 <div class="container">
 
- <div style="background-color: blanchedalmond"> nav </div>
+  <app-header></app-header>
 
- <div class="row">
-  <div class="col-2" style="background-color: cornflowerblue; min-height: 100vh"></div>
-  <div class="col-10" style="background-color: #2e88a8; min-height: 100vh">
-    <router-outlet></router-outlet>
+  <div class="row mt-75px">
+    <div class="col-12 col-lg-3 border-right">
+      <app-left-nav></app-left-nav>
+    </div>
+    <div class="col-12 col-lg-9 main-column">
+      <router-outlet></router-outlet>
+    </div>
   </div>
- </div>
 
 </div>
+<app-footer></app-footer>
 
