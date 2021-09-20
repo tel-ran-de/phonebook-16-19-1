@@ -13,6 +13,5 @@ export class ContactAddressesComponent implements OnInit {
   }
 
   open() {
-    console.log("address")
   }
 }

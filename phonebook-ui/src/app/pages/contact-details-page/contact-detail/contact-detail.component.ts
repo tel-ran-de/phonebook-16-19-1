@@ -17,7 +17,6 @@ export class ContactDetailComponent implements OnInit {
   }
 
   open() {
-    console.log("contact-details")
   }
 
 }

@@ -13,7 +13,6 @@ export class ContactEmailsComponent implements OnInit {
   }
 
   open() {
-    console.log("emails")
   }
 
 }

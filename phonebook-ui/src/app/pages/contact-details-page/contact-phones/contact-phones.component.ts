@@ -13,7 +13,6 @@ export class ContactPhonesComponent implements OnInit {
   }
 
   open() {
-    console.log("phone")
   }
 
 }
