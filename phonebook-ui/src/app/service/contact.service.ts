@@ -29,4 +29,9 @@ export class ContactService {
     return this.http.delete<void>(url);
   }
 
+  getContact(id: number): Observable<Contact> {
+    const url = `${this.phoneBookUrl}/${id}`;
+    return this.http.get<Contact>(url);
+  }
+
 }
