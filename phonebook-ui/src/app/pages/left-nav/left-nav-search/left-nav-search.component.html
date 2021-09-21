@@ -1,0 +1,12 @@
+<form id="search-form">
+  <div class="input-group mb-3">
+    <input type="search" class="form-control" placeholder="Search ..."
+           name="searchTerm"
+           [(ngModel)]="searchTerm">
+    <div class="input-group-append">
+      <button type="submit" class="btn btn-outline-secondary" (click)="onClickSearch()">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </div>
+</form>
