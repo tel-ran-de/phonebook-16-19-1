@@ -1,0 +1,27 @@
+<div class="col-sm-12 mt-4" *ngIf="errorStatus">
+
+  <ngb-alert [dismissible]="false">
+    <strong>Warning! {{errorStatus}}</strong>
+  </ngb-alert>
+
+</div>
+
+<div class="row mt-4" *ngIf="contact">
+
+  <div class="col-sm-12">
+    <app-contact-detail [contact]="contact"></app-contact-detail>
+  </div>
+
+  <div class="col-sm-12">
+    <app-contact-emails></app-contact-emails>
+  </div>
+
+  <div class="col-sm-12">
+    <app-contact-addresses></app-contact-addresses>
+  </div>
+
+  <div class="col-sm-12">
+    <app-contact-phones></app-contact-phones>
+  </div>
+
+</div>
