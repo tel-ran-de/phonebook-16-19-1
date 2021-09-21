@@ -34,4 +34,8 @@ export class ContactService {
     return this.http.get<Contact>(url);
   }
 
+  addContact(contact: Contact): Observable<Contact> {
+    return this.http.post<Contact>(this.phoneBookUrl, contact, this.httpOptions);
+  }
+
 }

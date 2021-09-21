@@ -14,6 +14,8 @@ import { ContactDetailComponent } from './pages/contact-details-page/contact-det
 import { ContactEmailsComponent } from './pages/contact-details-page/contact-emails/contact-emails.component';
 import { ContactPhonesComponent } from './pages/contact-details-page/contact-phones/contact-phones.component';
 import { ContactAddressesComponent } from './pages/contact-details-page/contact-addresses/contact-addresses.component';
+import { AddAndEditContactFormComponent } from './pages/modalwindows/add-and-edit-contact-form/add-and-edit-contact-form.component';
+import {FormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -26,6 +28,7 @@ import { ContactAddressesComponent } from './pages/contact-details-page/contact-
     ContactEmailsComponent,
     ContactPhonesComponent,
     ContactAddressesComponent,
+    AddAndEditContactFormComponent,
   ],
   imports: [
     HttpClientModule,
@@ -33,8 +36,9 @@ import { ContactAddressesComponent } from './pages/contact-details-page/contact-
     NgbModule,
     AppRoutingModule,
     HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, { dataEncapsulation: false }
-    )
+      InMemoryDataService, {dataEncapsulation: false}
+    ),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
