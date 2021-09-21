@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/contacts")
-public class ContactRestController {
+@RequestMapping("api/contact")
+public class ContactController {
 
     private final ContactService contactService;
-    private  final ContactMapper contactMapper;
+    private final ContactMapper contactMapper;
 
-    public ContactRestController(ContactService contactService, ContactMapper contactMapper) {
+    public ContactController(ContactService contactService, ContactMapper contactMapper) {
         this.contactService = contactService;
         this.contactMapper = contactMapper;
     }
