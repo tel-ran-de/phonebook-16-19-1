@@ -8,6 +8,5 @@ import lombok.NoArgsConstructor;
 public class EmailToAddDto {
     public String email;
     public boolean isFavorite;
-    public String group;
     public long contactId;
 }
