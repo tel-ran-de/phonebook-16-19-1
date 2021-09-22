@@ -21,7 +21,7 @@ export class EmailService {
     //url for facked backend
     const url = `${this.emailPath}?contactId=${contactId}`;
     //url for our backend
-    // const url = `${this.emailUrl}/${contactId}`;
+    // const url = `${this.emailUrl}/${contactId}/all`;
     return this.httpClient.get<Email[]>(url)
   }
 }
