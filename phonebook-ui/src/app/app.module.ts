@@ -14,8 +14,12 @@ import { ContactDetailComponent } from './pages/contact-details-page/contact-det
 import { ContactEmailsComponent } from './pages/contact-details-page/contact-emails/contact-emails.component';
 import { ContactPhonesComponent } from './pages/contact-details-page/contact-phones/contact-phones.component';
 import { ContactAddressesComponent } from './pages/contact-details-page/contact-addresses/contact-addresses.component';
+import {HeaderComponent} from "./pages/header/header.component";
+import {LeftNavComponent} from "./pages/left-nav/left-nav.component";
+import {LeftNavSearchComponent} from "./pages/left-nav/left-nav-search/left-nav-search.component";
+import {FooterComponent} from "./pages/footer/footer.component";
 import { AddAndEditContactFormComponent } from './pages/modalwindows/add-and-edit-contact-form/add-and-edit-contact-form.component';
-import {FormsModule} from "@angular/forms";
+import {FormsModule, ReactiveFormsModule} from "@angular/forms";
 
 
 @NgModule({
@@ -27,10 +31,15 @@ import {FormsModule} from "@angular/forms";
     ContactDetailComponent,
     ContactEmailsComponent,
     ContactPhonesComponent,
+    HeaderComponent,
+    LeftNavComponent,
+    LeftNavSearchComponent,
+    FooterComponent,
     ContactAddressesComponent,
     AddAndEditContactFormComponent,
   ],
   imports: [
+    ReactiveFormsModule,
     HttpClientModule,
     BrowserModule,
     NgbModule,
@@ -43,4 +52,5 @@ import {FormsModule} from "@angular/forms";
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

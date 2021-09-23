@@ -1,44 +1,56 @@
 
 <div class="modal-header">
-  <h4 class="modal-title">Add Contact</h4>
+  <h4 class="modal-title">{{artOfForm}}</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
     <span aria-hidden="true">&times;</span>
   </button>
 </div>
 <div class="modal-body">
-  <form class="row g-3" >
+  <form class="row g-3" [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="profileForm">
     <div class="col-md-6">
       <label for="inputName" class="form-label">FirstName</label>
-      <input type="text" class="form-control" id="inputName" [(ngModel)]="contact.firstName" name="first">
+      <input  type="text" class="form-control" id="inputName" formControlName="firstName" name="first">
     </div>
+
     <div class="col-md-6">
       <label for="inputLastName" class="form-label">LastName</label>
-      <input type="text" class="form-control" id="inputLastName" [(ngModel)]="contact.lastName" name="last">
+      <input type="text" class="form-control" id="inputLastName" formControlName="lastName" name="last">
     </div>
 
     <div class="col-md-6">
       <label for="inputAge" class="form-label">Age</label>
-      <input type="number" class="form-control" id="inputAge" [(ngModel)]="contact.age" name="age">
+      <input type="number" class="form-control" id="inputAge" formControlName="age" name="age">
     </div>
     <div class="col-md-4">
       <label for="inputState" class="form-label">Group</label>
-      <select id="inputState" class="form-select" [(ngModel)]="contact.group" name="group">
-        <option selected>private</option>
-        <option>...</option>
+      <select id="inputState" class="form-select" formControlName="group" name="group">
+        <option selected value="private">private</option>
+        <option value="home">home</option>
+        <option value="other">other</option>
       </select>
     </div>
 
     <div class="col-12">
       <div class="form-check">
-        <input class="form-check-input" type="checkbox" id="gridCheck" [(ngModel)]="contact.isFavorite" name="isfavorite">
+        <input class="form-check-input" type="checkbox" id="gridCheck" formControlName="isFavorite" name="isfavorite">
         <label class="form-check-label" for="gridCheck">
           isFavorite
         </label>
       </div>
     </div>
 
+    <div class="col-md-4">
+    <button type="submit"  class="btn btn-outline-dark" [disabled]="!profileForm.valid">Save</button>
+    </div>
   </form>
 </div>
 <div class="modal-footer">
-  <button type="button" class="btn btn-outline-dark" (click)="activeModal.close('Close click')">Close</button>
+
+  <div class="col-sm-12 mt-4" *ngIf="errorStatus">
+
+    <ngb-alert [dismissible]="false">
+      <strong>Warning! {{errorStatus}}</strong>
+    </ngb-alert>
+
+  </div>
 </div>
