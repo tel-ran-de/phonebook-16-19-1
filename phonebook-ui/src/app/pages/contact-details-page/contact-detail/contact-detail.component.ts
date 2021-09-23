@@ -23,6 +23,7 @@ export class ContactDetailComponent implements OnInit {
     const modalRef = this.modalService.open(AddAndEditContactFormComponent);
     modalRef.componentInstance.artOfForm = "Edit your contact";
     modalRef.componentInstance.contact = this.contact;
+    modalRef.result.then(value => this.contact = value);
   }
 
 }

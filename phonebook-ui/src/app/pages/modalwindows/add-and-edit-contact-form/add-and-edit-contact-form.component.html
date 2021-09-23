@@ -1,4 +1,3 @@
-
 <div class="modal-header">
   <h4 class="modal-title">{{artOfForm}}</h4>
   <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
@@ -6,20 +5,36 @@
   </button>
 </div>
 <div class="modal-body">
-  <form class="row g-3" [formGroup]="profileForm" (ngSubmit)="onSubmit()" *ngIf="profileForm">
+  <form class="row g-3 needs-validation" novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()"
+        *ngIf="profileForm">
     <div class="col-md-6">
-      <label for="inputName" class="form-label">FirstName</label>
-      <input  type="text" class="form-control" id="inputName" formControlName="firstName" name="first">
+      <label for="firstName" class="form-label">FirstName</label>
+      <input type="text" class="form-control" id="firstName" formControlName="firstName" name="first" required>
+
+      <div class="alert alert-danger"
+           *ngIf="profileForm.controls['firstName'].invalid && profileForm.controls['firstName'].touched ">
+        FirstName is Required!!!
+      </div>
     </div>
 
     <div class="col-md-6">
       <label for="inputLastName" class="form-label">LastName</label>
       <input type="text" class="form-control" id="inputLastName" formControlName="lastName" name="last">
+
+      <div class="alert alert-danger"
+           *ngIf="profileForm.controls['lastName'].invalid && profileForm.controls['lastName'].touched">
+        LastName is Required!!!
+      </div>
     </div>
 
     <div class="col-md-6">
       <label for="inputAge" class="form-label">Age</label>
       <input type="number" class="form-control" id="inputAge" formControlName="age" name="age">
+
+      <div class="alert alert-danger"
+           *ngIf="profileForm.controls['age'].invalid && profileForm.controls['age'].touched">
+        Age is Required!!!
+      </div>
     </div>
     <div class="col-md-4">
       <label for="inputState" class="form-label">Group</label>
@@ -39,9 +54,10 @@
       </div>
     </div>
 
-    <div class="col-md-4">
-    <button type="submit"  class="btn btn-outline-dark" [disabled]="!profileForm.valid">Save</button>
+    <div class="d-flex justify-content-end">
+      <button #butt type="submit" class="btn btn-outline-dark" [disabled]="!profileForm.valid">Save</button>
     </div>
+
   </form>
 </div>
 <div class="modal-footer">
