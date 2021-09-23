@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RequestMapping("api/phone")
-public class PhoneRestController {
+public class PhoneController {
     private final PhoneService phoneService;
     private final PhoneMapper phoneMapper;
 
-    public PhoneRestController(PhoneService phoneService, PhoneMapper phoneMapper) {
+    public PhoneController(PhoneService phoneService, PhoneMapper phoneMapper) {
         this.phoneService = phoneService;
         this.phoneMapper = phoneMapper;
     }
