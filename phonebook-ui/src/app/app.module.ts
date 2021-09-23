@@ -19,8 +19,9 @@ import {LeftNavComponent} from "./pages/left-nav/left-nav.component";
 import {LeftNavSearchComponent} from "./pages/left-nav/left-nav-search/left-nav-search.component";
 import {FooterComponent} from "./pages/footer/footer.component";
 import {FormsModule} from "@angular/forms";
-import {EmailElementComponent} from './pages/contact-details-page/contact-emails/email-element/email-element.component';
-import {SortByFavoritePipe} from './pages/contact-details-page/sort-by-favorite.pipe';
+import {PhoneDetailsComponent} from "./pages/contact-details-page/contact-phones/phone-details/phone-details.component";
+import {EmailElementComponent} from "./pages/contact-details-page/contact-emails/email-element/email-element.component";
+import {SortByFavoritePipe} from "./pages/contact-details-page/sort-by-favorite.pipe";
 
 
 @NgModule({
@@ -39,7 +40,7 @@ import {SortByFavoritePipe} from './pages/contact-details-page/sort-by-favorite.
     FooterComponent,
     EmailElementComponent,
     SortByFavoritePipe,
-
+    PhoneDetailsComponent,
 
   ],
   imports: [

@@ -9,6 +9,9 @@
       </div>
     </div>
   </div>
-  <div class="card-body">
+  <div class="card-body overflow-auto" style="max-height: 150px">
+    <ng-template [ngIf]="phones">
+      <app-phone-details *ngFor="let phone of phones | sortByFavorite" [phone]="phone"></app-phone-details>
+    </ng-template>
   </div>
 </div>
