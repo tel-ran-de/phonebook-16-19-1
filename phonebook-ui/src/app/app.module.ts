@@ -24,7 +24,6 @@ import {EmailElementComponent} from "./pages/contact-details-page/contact-emails
 import {SortByFavoritePipe} from "./pages/contact-details-page/sort-by-favorite.pipe";
 import {AddressDetailsComponent} from './pages/contact-details-page/contact-addresses/address-details/address-details.component';
 
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +42,6 @@ import {AddressDetailsComponent} from './pages/contact-details-page/contact-addr
     SortByFavoritePipe,
     PhoneDetailsComponent,
     AddressDetailsComponent,
-
   ],
   imports: [
     HttpClientModule,
