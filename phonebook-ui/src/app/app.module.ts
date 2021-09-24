@@ -5,8 +5,6 @@ import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppRoutingModule} from './app-routing.module';
 import {HttpClientModule} from '@angular/common/http';
-import {HttpClientInMemoryWebApiModule} from 'angular-in-memory-web-api';
-import {InMemoryDataService} from './service/in-memory-data.service';
 import {ContactsComponent} from './pages/contacts/contact-list/contacts.component';
 import {CardComponent} from './pages/contacts/contact-item/card.component';
 import {ContactDetailsPageComponent} from './pages/contact-details-page/contact-details-page.component';
@@ -48,9 +46,6 @@ import {AddressDetailsComponent} from './pages/contact-details-page/contact-addr
     BrowserModule,
     NgbModule,
     AppRoutingModule,
-    HttpClientInMemoryWebApiModule.forRoot(
-      InMemoryDataService, {dataEncapsulation: false}
-    ),
     FormsModule
   ],
   providers: [],

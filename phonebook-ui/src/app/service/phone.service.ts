@@ -17,7 +17,7 @@ export class PhoneService {
   }
 
   getAll(contactId: number): Observable<Phone[]> {
-    const url = `${this.phonePath}?contactId=${contactId}`;
+    const url = `${this.phonePath}/${contactId}/all`;
     return this.httpClient.get<Phone[]>(url)
   }
 
