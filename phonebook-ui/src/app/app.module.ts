@@ -22,6 +22,7 @@ import {FormsModule} from "@angular/forms";
 import {PhoneDetailsComponent} from "./pages/contact-details-page/contact-phones/phone-details/phone-details.component";
 import {EmailElementComponent} from "./pages/contact-details-page/contact-emails/email-element/email-element.component";
 import {SortByFavoritePipe} from "./pages/contact-details-page/sort-by-favorite.pipe";
+import {AddressDetailsComponent} from './pages/contact-details-page/contact-addresses/address-details/address-details.component';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import {SortByFavoritePipe} from "./pages/contact-details-page/sort-by-favorite.
     EmailElementComponent,
     SortByFavoritePipe,
     PhoneDetailsComponent,
+    AddressDetailsComponent,
 
   ],
   imports: [
