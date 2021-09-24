@@ -2,7 +2,7 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {Contact} from "../../../model/contact";
 import {ContactService} from "../../../service/contact.service";
-import {ActivatedRoute, Router} from "@angular/router";
+import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -40,30 +40,9 @@ export class AddAndEditContactFormComponent implements OnInit, OnDestroy {
 
     if (this.artOfForm === "Edit your contact") {
       this.editContact();
-      return;
+    } else {
+      this.addContact();
     }
-
-    const getAddContactSubscribe = this.contactService.addContact(this.profileForm?.value)
-      .subscribe(value => {
-          this.callBackOkk(value)
-        },
-        error => {
-          this.errorStatus = 'something went wrong with process of adding your contacts';
-        });
-
-    this.subscriptions.push(getAddContactSubscribe);
-  }
-
-  private callBackOkk(value: Contact) {
-
-    this.redirect(value);
-    this.activeModal.close();
-  }
-
-  private redirect(value: Contact) {
-
-    const url = `contacts/${value.id}`;
-    this.router.navigateByUrl(url);
   }
 
   private setFormValues() {
@@ -80,9 +59,9 @@ export class AddAndEditContactFormComponent implements OnInit, OnDestroy {
 
     this.profileForm = this.fb.group({
       'id': [null],
-      'firstName': [null, Validators.required],
-      'lastName': [null, Validators.required],
-      'age': [null, Validators.required],
+      'firstName': [null, [Validators.required]],
+      'lastName': [null, [Validators.required]],
+      'age': [1, [Validators.required, Validators.min(1), Validators.max(120)]],
       'isFavorite': [null],
       'group': ["home"]
     });
@@ -102,6 +81,28 @@ export class AddAndEditContactFormComponent implements OnInit, OnDestroy {
         });
 
     this.subscriptions.push(getEditContactSubscribe);
+  }
+
+  private addContact() {
+
+    const getAddContactSubscribe = this.contactService.addContact(this.profileForm?.value)
+      .subscribe(value => {
+          this.callBackOk(value)
+        },
+        error => {
+          this.errorStatus = 'something went wrong with process of adding your contacts';
+        });
+
+    this.subscriptions.push(getAddContactSubscribe);
+  }
+
+  private callBackOk(value: Contact) {
+
+    const url = `contacts/${value.id}`;
+
+    this.activeModal.close();
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate([url]));
   }
 
   ngOnDestroy() {
