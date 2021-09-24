@@ -10,7 +10,11 @@
     </div>
 
   </div>
-  <div class="card-body">
+  <div class="card-body overflow-auto" style="max-height: 150px">
+    <ng-template [ngIf]="addresses">
+      <app-address-details *ngFor="let address of addresses | sortByFavorite" [address]="address"></app-address-details>
+    </ng-template>
   </div>
 
 </div>
+
