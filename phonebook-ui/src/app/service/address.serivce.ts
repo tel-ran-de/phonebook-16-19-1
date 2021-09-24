@@ -17,7 +17,7 @@ export class AddressService {
   }
 
   getAll(contactId: number): Observable<Address[]> {
-    const url = `${this.addressPath}?contactId=${contactId}`;
+    const url = `${this.addressPath}/${contactId}/all`;
     return this.httpClient.get<Address[]>(url)
   }
 

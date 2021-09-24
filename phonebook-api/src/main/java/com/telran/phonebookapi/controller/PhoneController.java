@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@RestController
 @RequestMapping("api/phone")
 public class PhoneController {
     private final PhoneService phoneService;
