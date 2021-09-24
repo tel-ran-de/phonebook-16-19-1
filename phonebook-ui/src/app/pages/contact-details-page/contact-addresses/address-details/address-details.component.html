@@ -1,0 +1,22 @@
+<div class="row" *ngIf="address">
+  <div class="col-md-1 col-sm-2 col-1">
+    <div class="">
+      <i [ngClass]="address.isFavorite ? 'bi bi-star' : 'bi bi-star-fill'"></i>
+    </div>
+  </div>
+  <div class="col-md-7 col-sm-6 col-10">
+    <div>{{address.country}} {{address.city}} {{address.street}} {{address.homeNr}} {{address.index}}</div>
+  </div>
+  <div class="col-md-3 col-sm-5 col-6">
+    <div class="btn-group">
+      <button type="button" class="btn btn-outline-secondary">
+        <i class="bi bi-pen"></i>
+        <span class="visually-hidden">Edit</span>
+      </button>
+      <button type="button" class="btn btn-outline-secondary">
+        <i class="bi bi-x-circle"></i>
+        <span class="visually-hidden">Delete</span>
+      </button>
+    </div>
+  </div>
+</div>
