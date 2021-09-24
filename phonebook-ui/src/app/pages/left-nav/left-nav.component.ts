@@ -1,5 +1,7 @@
 import {Component} from '@angular/core';
 import {Router} from "@angular/router";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AddAndEditContactFormComponent} from "../modalwindows/add-and-edit-contact-form/add-and-edit-contact-form.component";
 
 @Component({
   selector: 'app-left-nav',
@@ -16,9 +18,11 @@ export class LeftNavComponent {
   ];
 
   sidebarCollapsed = true;
+  private check:String | undefined;
 
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private modalService: NgbModal) {
   }
 
   isActive(currentRoute: string): boolean {
@@ -28,6 +32,11 @@ export class LeftNavComponent {
       fragment: 'ignored',
       matrixParams: 'ignored'
     });
+  }
+
+  open() {
+    const modalRef = this.modalService.open(AddAndEditContactFormComponent);
+     modalRef.componentInstance.artOfForm = "Add contact";
   }
 
 }
