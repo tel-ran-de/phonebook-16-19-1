@@ -28,14 +28,14 @@ public class ContactController {
     public List<ContactToDisplayDto> getAllContacts() {
 
         return contactService.getAllContacts().stream()
-                .map(contactMapper ::toDto).collect(Collectors.toList());
+                .map(contactMapper::toDto).collect(Collectors.toList());
     }
 
     @PostMapping
     public ContactToDisplayDto add(@RequestBody ContactToAddDto contactToAdd) {
 
         Contact contact = contactService.add(contactToAdd.firstName, contactToAdd.lastName, contactToAdd.age,
-                contactToAdd.isFavorite, Group.valueOf(contactToAdd.group));
+                contactToAdd.isFavorite, Group.valueOf(contactToAdd.group.toUpperCase()));
         return contactMapper.toDto(contact);
     }
 
@@ -44,7 +44,7 @@ public class ContactController {
 
         contactService.editById(contactToEditDto.firstName, contactToEditDto.lastName, contactToEditDto.age,
                 contactToEditDto.isFavorite,
-                Group.valueOf(contactToEditDto.group), contactId);
+                Group.valueOf(contactToEditDto.group.toUpperCase()), contactId);
     }
 
     @GetMapping("/{id}")
@@ -54,7 +54,7 @@ public class ContactController {
         return contactMapper.toDto(contact);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable(name = "id") long contactId) {
 
         contactService.deleteById(contactId);
