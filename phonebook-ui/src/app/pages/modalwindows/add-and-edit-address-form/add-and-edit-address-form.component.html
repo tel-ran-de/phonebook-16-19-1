@@ -1,0 +1,69 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{artOfForm}}</h4>
+  <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
+    <span aria-hidden="true">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+
+  <form class="row g-3 needs-validation" novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()"
+        *ngIf="profileForm">
+    <div class="col-md-6">
+      <label for="country" class="form-label">Country <i class="bi bi-star"></i></label>
+      <input type="text" class="form-control" id="country" formControlName="country" name="country" required>
+
+      <div class="alert alert-danger"
+           *ngIf="profileForm.controls['country'].invalid && profileForm.controls['country'].touched ">
+        Country is required
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="inputCity" class="form-label">City <i class="bi bi-star"></i></label>
+      <input type="text" class="form-control" id="inputCity" formControlName="city" name="last">
+
+      <div class="alert alert-danger"
+           *ngIf="profileForm.controls['city'].invalid && profileForm.controls['city'].touched">
+        City is required
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="inputAddress" class="form-label">Address <i class="bi bi-star"></i></label>
+      <input type="text" class="form-control" id="inputAddress" formControlName="address" name="age">
+
+      <div class="alert alert-danger"
+           *ngIf="profileForm.controls['address'].invalid && profileForm.controls['address'].touched">
+        Address is required
+      </div>
+    </div>
+
+    <div class="col-md-6">
+      <label for="inputIndex" class="form-label">Index <i class="bi bi-star"></i></label>
+      <input type="text" class="form-control" id="inputIndex" formControlName="index" name="index">
+
+      <div class="alert alert-danger"
+           *ngIf="profileForm.controls['index'].invalid && profileForm.controls['index'].touched">
+        Index is required
+      </div>
+    </div>
+
+
+    <div class="col-12">
+      <div class="form-check">
+        <input class="form-check-input" type="checkbox" id="gridCheck" formControlName="isFavorite" name="isfavorite">
+        <label class="form-check-label" for="gridCheck">
+          isFavorite
+        </label>
+      </div>
+    </div>
+
+    <div class="d-flex justify-content-between">
+      <i class="bi bi-star"> fields with star are required</i>
+      <button #butt type="submit" class="btn btn-outline-dark" [disabled]="!profileForm.valid">Save</button>
+    </div>
+
+  </form>
+</div>
+<div class="modal-footer">
+</div>
