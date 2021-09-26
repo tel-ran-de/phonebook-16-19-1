@@ -66,4 +66,10 @@
   </form>
 </div>
 <div class="modal-footer">
+
+  <div class="col-sm-12 mt-4" *ngIf="errorStatus">
+    <ngb-alert [dismissible]="false">
+      <strong>Warning! {{errorStatus}}</strong>
+    </ngb-alert>
+  </div>
 </div>

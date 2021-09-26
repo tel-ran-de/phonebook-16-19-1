@@ -85,9 +85,7 @@ export class AddAndEditAddressFormComponent implements OnInit, OnDestroy {
 
   private addAddress() {
 
-    console.log(this.profileForm?.value)
-
-    const getAddContactSubscribe = this.addressService.addAddress(this.profileForm?.value)
+    const getAddAddressSubscribe = this.addressService.addAddress(this.profileForm?.value)
       .subscribe(value => {
           this.callBack(value)
         },
@@ -95,7 +93,7 @@ export class AddAndEditAddressFormComponent implements OnInit, OnDestroy {
           this.errorStatus = 'something went wrong with process of adding your address';
         });
 
-    this.subscriptions.push(getAddContactSubscribe);
+    this.subscriptions.push(getAddAddressSubscribe);
   }
 
   private callBack(value: Address) {
