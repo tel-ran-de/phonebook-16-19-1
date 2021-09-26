@@ -23,6 +23,7 @@ import {PhoneDetailsComponent} from "./pages/contact-details-page/contact-phones
 import {EmailElementComponent} from "./pages/contact-details-page/contact-emails/email-element/email-element.component";
 import {SortByFavoritePipe} from "./pages/contact-details-page/sort-by-favorite.pipe";
 import {AddressDetailsComponent} from './pages/contact-details-page/contact-addresses/address-details/address-details.component';
+import { AddAndEditEmailFormComponent } from './pages/modalwindows/add-and-edit-email-form/add-and-edit-email-form.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import {AddressDetailsComponent} from './pages/contact-details-page/contact-addr
     SortByFavoritePipe,
     PhoneDetailsComponent,
     AddressDetailsComponent,
+    AddAndEditEmailFormComponent,
   ],
   imports: [
     ReactiveFormsModule,
