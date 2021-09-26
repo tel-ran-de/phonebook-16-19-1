@@ -1,0 +1,20 @@
+<div class="card">
+  <div class="card-header">
+    <div class="d-flex justify-content-between align-items-center">
+
+      <div>Address</div>
+      <div>
+        <button type="button" class="btn btn-light" (click)="open()"><i class="bi bi-cloud-plus"></i>Add</button>
+      </div>
+
+    </div>
+
+  </div>
+  <div class="card-body overflow-auto" style="max-height: 150px">
+    <ng-template [ngIf]="addresses">
+      <app-address-details *ngFor="let address of addresses | sortByFavorite" [address]="address"></app-address-details>
+    </ng-template>
+  </div>
+
+</div>
+

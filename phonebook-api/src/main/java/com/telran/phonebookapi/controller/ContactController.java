@@ -13,13 +13,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("api/contacts")
-public class ContactRestController {
+@RequestMapping("api/contact")
+public class ContactController {
 
     private final ContactService contactService;
-    private  final ContactMapper contactMapper;
+    private final ContactMapper contactMapper;
 
-    public ContactRestController(ContactService contactService, ContactMapper contactMapper) {
+    public ContactController(ContactService contactService, ContactMapper contactMapper) {
         this.contactService = contactService;
         this.contactMapper = contactMapper;
     }
@@ -28,14 +28,14 @@ public class ContactRestController {
     public List<ContactToDisplayDto> getAllContacts() {
 
         return contactService.getAllContacts().stream()
-                .map(contactMapper ::toDto).collect(Collectors.toList());
+                .map(contactMapper::toDto).collect(Collectors.toList());
     }
 
     @PostMapping
     public ContactToDisplayDto add(@RequestBody ContactToAddDto contactToAdd) {
 
         Contact contact = contactService.add(contactToAdd.firstName, contactToAdd.lastName, contactToAdd.age,
-                contactToAdd.isFavorite, Group.valueOf(contactToAdd.group));
+                contactToAdd.isFavorite, Group.valueOf(contactToAdd.group.toUpperCase()));
         return contactMapper.toDto(contact);
     }
 
@@ -44,7 +44,7 @@ public class ContactRestController {
 
         contactService.editById(contactToEditDto.firstName, contactToEditDto.lastName, contactToEditDto.age,
                 contactToEditDto.isFavorite,
-                Group.valueOf(contactToEditDto.group), contactId);
+                Group.valueOf(contactToEditDto.group.toUpperCase()), contactId);
     }
 
     @GetMapping("/{id}")
@@ -54,7 +54,7 @@ public class ContactRestController {
         return contactMapper.toDto(contact);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable(name = "id") long contactId) {
 
         contactService.deleteById(contactId);
