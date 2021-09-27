@@ -6,34 +6,34 @@
 </div>
 <div class="modal-body">
 
-  <form class="row g-3 needs-validation" novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()"
-        *ngIf="profileForm">
+  <form class="row g-3 needs-validation" novalidate [formGroup]="addressForm" (ngSubmit)="onSubmit()"
+        *ngIf="addressForm">
     <div class="col-md-6">
       <label for="country" class="form-label">Country <i class="bi bi-star"></i></label>
-      <input type="text" class="form-control" id="country" formControlName="country" name="country" required>
+      <input type="text" class="form-control" id="country" formControlName="country" name="country">
 
       <div class="alert alert-danger"
-           *ngIf="profileForm.controls['country'].invalid && profileForm.controls['country'].touched ">
+           *ngIf="addressForm.controls['country'].invalid && addressForm.controls['country'].touched ">
         Country is required
       </div>
     </div>
 
     <div class="col-md-6">
       <label for="inputCity" class="form-label">City <i class="bi bi-star"></i></label>
-      <input type="text" class="form-control" id="inputCity" formControlName="city" name="last">
+      <input type="text" class="form-control" id="inputCity" formControlName="city" name="city">
 
       <div class="alert alert-danger"
-           *ngIf="profileForm.controls['city'].invalid && profileForm.controls['city'].touched">
+           *ngIf="addressForm.controls['city'].invalid && addressForm.controls['city'].touched">
         City is required
       </div>
     </div>
 
     <div class="col-md-6">
       <label for="inputAddress" class="form-label">Address <i class="bi bi-star"></i></label>
-      <input type="text" class="form-control" id="inputAddress" formControlName="address" name="age">
+      <input type="text" class="form-control" id="inputAddress" formControlName="address" name="address">
 
       <div class="alert alert-danger"
-           *ngIf="profileForm.controls['address'].invalid && profileForm.controls['address'].touched">
+           *ngIf="addressForm.controls['address'].invalid && addressForm.controls['address'].touched">
         Address is required
       </div>
     </div>
@@ -43,11 +43,10 @@
       <input type="text" class="form-control" id="inputIndex" formControlName="index" name="index">
 
       <div class="alert alert-danger"
-           *ngIf="profileForm.controls['index'].invalid && profileForm.controls['index'].touched">
+           *ngIf="addressForm.controls['index'].invalid && addressForm.controls['index'].touched">
         Index is required
       </div>
     </div>
-
 
     <div class="col-12">
       <div class="form-check">
@@ -60,7 +59,7 @@
 
     <div class="d-flex justify-content-between">
       <i class="bi bi-star"> fields with star are required</i>
-      <button #butt type="submit" class="btn btn-outline-dark" [disabled]="!profileForm.valid">Save</button>
+      <button #butt type="submit" class="btn btn-outline-dark" [disabled]="!addressForm.valid">Save</button>
     </div>
 
   </form>

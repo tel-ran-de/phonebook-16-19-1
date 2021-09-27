@@ -25,12 +25,13 @@ export class ContactAddressesComponent implements OnInit, OnDestroy {
     this.getAllAddresses();
   }
 
-  open() {
+  openAddModalWindow() {
     const contactId = Number(this.route.snapshot.paramMap.get('id'));
     const modalRef = this.modalService.open(AddAndEditAddressFormComponent);
 
     modalRef.componentInstance.contactId = contactId;
-    modalRef.componentInstance.artOfForm = "Add your address"
+    modalRef.componentInstance.artOfForm = "Add your address";
+    modalRef.closed.subscribe(value => this.addresses?.push(value));
   }
 
   private getAllAddresses() {
