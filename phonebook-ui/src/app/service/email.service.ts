@@ -21,4 +21,9 @@ export class EmailService {
     const url = `${this.emailPath}/${contactId}/all`;
     return this.httpClient.get<Email[]>(url)
   }
+
+  deleteEmail(id: number): Observable<void> {
+    const url = `${this.emailPath}/${id}`;
+    return this.httpClient.delete<void>(url);
+  }
 }

@@ -14,6 +14,7 @@ export class ContactEmailsComponent implements OnInit, OnDestroy {
 
   emails: Email[] | undefined;
   getAllEmailsErrorMessage: string | undefined;
+  deleteEmailErrorMessage: string | undefined;
 
   private subscriptions: Subscription[] = [];
 
@@ -40,6 +41,19 @@ export class ContactEmailsComponent implements OnInit, OnDestroy {
 
   private callBackGetAllEmailError(error: HttpErrorResponse) {
     this.getAllEmailsErrorMessage = "Error";
+  }
+
+  deleteEmail(event: Email) {
+
+    const deleteEmailSubscribe = this.emailService.deleteEmail(event.id)
+      .subscribe(_ =>
+          this.emails = this.emails!.filter(h => h !== event)
+        ,
+        () =>
+          this.deleteEmailErrorMessage = 'something went wrong with delete process'
+        );
+
+    this.subscriptions.push(deleteEmailSubscribe);
   }
 
   ngOnDestroy(): void {

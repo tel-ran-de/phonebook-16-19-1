@@ -1,4 +1,5 @@
-import {Component, Input} from '@angular/core';
+import { EventEmitter } from '@angular/core';
+import {Component, Input, Output} from '@angular/core';
 import {Email} from "../../../../model/email";
 
 @Component({
@@ -10,4 +11,12 @@ export class EmailElementComponent {
 
   @Input()
   email: Email | undefined;
+  @Output()
+  childButtonClick = new EventEmitter<Email>();
+
+
+  deleteEmail() {
+    const toParent = this.email;
+    this.childButtonClick.emit(toParent);
+  }
 }
