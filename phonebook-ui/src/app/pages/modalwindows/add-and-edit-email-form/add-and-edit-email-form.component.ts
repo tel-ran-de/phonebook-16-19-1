@@ -2,7 +2,6 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
-import {Router} from "@angular/router";
 import {EmailService} from "../../../service/email.service";
 import {Email} from "../../../model/email";
 
@@ -17,14 +16,14 @@ export class AddAndEditEmailFormComponent implements OnInit, OnDestroy {
   email: Email | undefined;
   @Input()
   contactId: number | undefined;
-  profileForm: FormGroup | undefined;
+  emailForm: FormGroup | undefined;
   errorStatus: String | undefined;
   subscriptions: Subscription[] = [];
   @Input()
   artOfForm: String | undefined;
 
   constructor(public activeModal: NgbActiveModal, private emailService: EmailService,
-              private router: Router, private fb: FormBuilder) {
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -36,7 +35,7 @@ export class AddAndEditEmailFormComponent implements OnInit, OnDestroy {
 
   private initForm() {
 
-    this.profileForm = this.fb.group({
+    this.emailForm = this.fb.group({
       'id': [null],
       'email': [null, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$')]],
       'isFavorite': [null],
@@ -46,9 +45,11 @@ export class AddAndEditEmailFormComponent implements OnInit, OnDestroy {
 
   private setFormValue() {
 
-    this.profileForm?.controls.email.setValue(this.email?.email);
-    this.profileForm?.controls.id.setValue(this.email?.id);
-    this.profileForm?.controls.isFavorite.setValue(this.email?.isFavorite);
+    this.emailForm!.controls.email.setValue(this.email!.email);
+    this.emailForm!.controls.id.setValue(this.email!.id);
+    this.emailForm!.controls.isFavorite.setValue(this.email!.isFavorite);
+    //alternative way to set form with values
+    this.emailForm!.setValue(this.email!)
   }
 
   onSubmit() {
@@ -64,39 +65,31 @@ export class AddAndEditEmailFormComponent implements OnInit, OnDestroy {
 
   private editAddress() {
 
-    const editEmail = this.profileForm?.value;
+    const editEmail = this.emailForm?.value;
 
     const getEditEmailSubscribe = this.emailService.editEmail(editEmail)
       .subscribe(
-        value => {
-          this.activeModal.close(editEmail);
-        },
-        error => {
-          this.errorStatus = 'something went wrong with process of editing your email';
-        });
+        value =>
+          this.activeModal.close(editEmail)
+        ,
+        error =>
+          this.errorStatus = 'something went wrong with process of editing your email'
+        );
 
     this.subscriptions.push(getEditEmailSubscribe);
   }
 
   private addAddress() {
 
-    const getAddEmailSubscribe = this.emailService.addEmail(this.profileForm?.value)
-      .subscribe(value => {
-          this.callBack(value)
-        },
-        error => {
-          this.errorStatus = 'something went wrong with process of adding your email';
-        });
+    const getAddEmailSubscribe = this.emailService.addEmail(this.emailForm?.value)
+      .subscribe(value =>
+          this.activeModal.close(value)
+        ,
+        error =>
+          this.errorStatus = 'something went wrong with process of adding your email'
+        );
 
     this.subscriptions.push(getAddEmailSubscribe);
-  }
-
-  private callBack(value: Email) {
-
-    const url = `contacts/${value.contactId}`;
-    this.activeModal.close();
-    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
-      this.router.navigate([url]));
   }
 
   ngOnDestroy() {

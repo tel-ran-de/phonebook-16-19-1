@@ -5,14 +5,14 @@
   </button>
 </div>
 <div class="modal-body">
-  <form class="row g-3 needs-validation" novalidate [formGroup]="profileForm" (ngSubmit)="onSubmit()"
-        *ngIf="profileForm">
+  <form class="row g-3 needs-validation" novalidate [formGroup]="emailForm" (ngSubmit)="onSubmit()"
+        *ngIf="emailForm">
     <div class="col-md-6">
       <label for="email" class="form-label">Email <i class="bi bi-star"></i></label>
       <input type="text" class="form-control" id="email" formControlName="email" name="email">
 
       <div class="alert alert-danger"
-           *ngIf="profileForm.controls['email'].invalid && profileForm.controls['email'].touched ">
+           *ngIf="emailForm.controls['email'].invalid && emailForm.controls['email'].touched ">
         email is required or invalid email
       </div>
     </div>
@@ -28,7 +28,7 @@
 
     <div class="d-flex justify-content-between">
       <i class="bi bi-star"> fields with star are required</i>
-      <button #butt type="submit" class="btn btn-outline-dark" [disabled]="!profileForm.valid">Save</button>
+      <button #butt type="submit" class="btn btn-outline-dark" [disabled]="!emailForm.valid">Save</button>
     </div>
 
   </form>

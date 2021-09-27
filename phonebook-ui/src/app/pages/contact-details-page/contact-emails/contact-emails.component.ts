@@ -34,6 +34,7 @@ export class ContactEmailsComponent implements OnInit, OnDestroy {
     const modalRef = this.modalService.open(AddAndEditEmailFormComponent);
     modalRef.componentInstance.artOfForm = "Add your email";
     modalRef.componentInstance.contactId = contactId;
+    modalRef.closed.subscribe(value => this.emails?.push(value));
   }
 
   private getAllEmails() {
