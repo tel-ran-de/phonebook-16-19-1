@@ -37,6 +37,10 @@ export class ContactPhonesComponent implements OnInit, OnDestroy {
     this.getAllPhonesErrorMessage = "Error";
   }
 
+  deletePhone($event: Phone): void {
+    this.phones = this.phones?.filter(value => value.id !== $event.id);
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }

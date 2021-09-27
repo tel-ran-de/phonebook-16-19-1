@@ -21,4 +21,9 @@ export class AddressService {
     return this.httpClient.get<Address[]>(url)
   }
 
+  deleteAddress(id: number): Observable<void> {
+    const url = `${this.addressPath}/${id}`
+    return this.httpClient.delete<void>(url);
+  }
+
 }
