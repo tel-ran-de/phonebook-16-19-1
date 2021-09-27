@@ -2,7 +2,6 @@ import {Component, Input, OnDestroy, OnInit} from '@angular/core';
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
-import {Router} from "@angular/router";
 import {Address} from "../../../model/address";
 import {AddressService} from "../../../service/address.serivce";
 
@@ -24,7 +23,7 @@ export class AddAndEditAddressFormComponent implements OnInit, OnDestroy {
   artOfForm: String | undefined;
 
   constructor(public activeModal: NgbActiveModal, private addressService: AddressService,
-              private router: Router, private fb: FormBuilder) {
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -82,7 +81,7 @@ export class AddAndEditAddressFormComponent implements OnInit, OnDestroy {
         ,
         error =>
           this.errorStatus = 'something went wrong with process of editing your address'
-        );
+      );
 
     this.subscriptions.push(getEditAddressSubscribe);
   }
