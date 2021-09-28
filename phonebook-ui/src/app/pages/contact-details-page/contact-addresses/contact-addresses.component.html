@@ -4,7 +4,8 @@
 
       <div>Address</div>
       <div>
-        <button type="button" class="btn btn-light" (click)="openAddModalWindow()"><i class="bi bi-cloud-plus"></i>Add</button>
+        <button type="button" class="btn btn-light" (click)="openAddModalWindow()"><i class="bi bi-cloud-plus"></i>Add
+        </button>
       </div>
 
     </div>
@@ -12,7 +13,10 @@
   </div>
   <div class="card-body overflow-auto" style="max-height: 300px">
     <ng-template [ngIf]="addresses">
-      <app-address-details *ngFor="let address of addresses | sortByFavorite" [address]="address"></app-address-details>
+      <app-address-details *ngFor="let address of addresses | sortByFavorite"
+                           [address]="address"
+                           (addressDeleted)="deleteAddress($event)"
+      ></app-address-details>
     </ng-template>
   </div>
 

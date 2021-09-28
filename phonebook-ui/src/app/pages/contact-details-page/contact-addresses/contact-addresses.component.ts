@@ -48,6 +48,10 @@ export class ContactAddressesComponent implements OnInit, OnDestroy {
 
   }
 
+  deleteAddress($event: Address): void {
+    this.addresses = this.addresses?.filter(value => value.id !== $event.id);
+  }
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(subscription => subscription.unsubscribe())
   }

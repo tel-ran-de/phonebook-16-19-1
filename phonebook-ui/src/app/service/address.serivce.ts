@@ -25,10 +25,10 @@ export class AddressService {
     return this.httpClient.post<Address>(this.addressPath, address, this.httpOptions);
   }
 
-  editAddress(address: Address): Observable<void>{
+  editAddress(address: Address): Observable<void> {
 
     const url = `${this.addressPath}/${address.id}`;
-    return this.httpClient.put<void>(url,address,this.httpOptions);
+    return this.httpClient.put<void>(url, address, this.httpOptions);
   }
 
   deleteAddress(id: number): Observable<void> {

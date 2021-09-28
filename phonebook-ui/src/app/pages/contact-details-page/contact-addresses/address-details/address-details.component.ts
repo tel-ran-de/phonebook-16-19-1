@@ -24,7 +24,7 @@ export class AddressDetailsComponent {
   constructor(private modalService: NgbModal, private addressService: AddressService) {
   }
 
-  open() {
+  openEditAddressModal() {
     const modalRef = this.modalService.open(AddAndEditAddressFormComponent);
 
     modalRef.componentInstance.address = this.address;

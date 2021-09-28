@@ -1,7 +1,5 @@
 import {NgModule} from '@angular/core';
 import {BrowserModule} from '@angular/platform-browser';
-
-
 import {AppComponent} from './app.component';
 import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
 import {AppRoutingModule} from './app-routing.module';
@@ -23,7 +21,7 @@ import {PhoneDetailsComponent} from "./pages/contact-details-page/contact-phones
 import {EmailElementComponent} from "./pages/contact-details-page/contact-emails/email-element/email-element.component";
 import {SortByFavoritePipe} from "./pages/contact-details-page/sort-by-favorite.pipe";
 import {AddressDetailsComponent} from './pages/contact-details-page/contact-addresses/address-details/address-details.component';
-import { AddAndEditAddressFormComponent } from './pages/modalwindows/add-and-edit-address-form/add-and-edit-address-form.component';
+import {AddAndEditAddressFormComponent} from './pages/modalwindows/add-and-edit-address-form/add-and-edit-address-form.component';
 
 
 @NgModule({
