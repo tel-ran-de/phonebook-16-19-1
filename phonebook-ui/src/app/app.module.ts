@@ -22,7 +22,7 @@ import {EmailElementComponent} from "./pages/contact-details-page/contact-emails
 import {SortByFavoritePipe} from "./pages/contact-details-page/sort-by-favorite.pipe";
 import {AddressDetailsComponent} from './pages/contact-details-page/contact-addresses/address-details/address-details.component';
 import {AddAndEditAddressFormComponent} from './pages/modalwindows/add-and-edit-address-form/add-and-edit-address-form.component';
-
+import {ToastsContainer} from './pages/toasts/toasts.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +44,7 @@ import {AddAndEditAddressFormComponent} from './pages/modalwindows/add-and-edit-
     PhoneDetailsComponent,
     AddressDetailsComponent,
     AddAndEditAddressFormComponent,
+    ToastsContainer
   ],
   imports: [
     ReactiveFormsModule,

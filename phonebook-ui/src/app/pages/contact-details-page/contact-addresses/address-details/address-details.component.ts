@@ -4,6 +4,7 @@ import {Subscription} from 'rxjs';
 import {AddressService} from 'src/app/service/address.serivce';
 import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddAndEditAddressFormComponent} from "../../../modalwindows/add-and-edit-address-form/add-and-edit-address-form.component";
+import {ToastService} from "../../../../service/toast.service";
 
 
 @Component({
@@ -15,16 +16,15 @@ export class AddressDetailsComponent {
 
   @Input()
   address: Address | undefined;
-  errorStatus: String | undefined;
   subscriptions: Subscription[] = [];
 
   @Output()
   addressDeleted: EventEmitter<Address> = new EventEmitter<Address>();
 
-  constructor(private modalService: NgbModal, private addressService: AddressService) {
+  constructor(private modalService: NgbModal, private addressService: AddressService, private toastService: ToastService) {
   }
 
-  openEditAddressModal() {
+  openEditAddressModal(): void {
     const modalRef = this.modalService.open(AddAndEditAddressFormComponent);
 
     modalRef.componentInstance.address = this.address;
@@ -32,11 +32,15 @@ export class AddressDetailsComponent {
     modalRef.closed.subscribe(value => this.address = value);
   }
 
-  onClickDelete() {
-    this.errorStatus = undefined;
+  onClickDelete(): void {
     const deleteAddressSubscribe = this.addressService.deleteAddress(this.address!.id)
       .subscribe(_ => this.addressDeleted.emit(this.address),
-        () => this.errorStatus = "something went wrong deleting address");
+        () => this.toastService.show('something went wrong deleting address',
+          {
+            classname: 'bg-danger text-light mt-5',
+            delay: 5000
+          })
+      );
     this.subscriptions.push(deleteAddressSubscribe)
   }
 
