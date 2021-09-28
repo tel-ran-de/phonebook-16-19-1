@@ -4,6 +4,8 @@ import {Subscription} from "rxjs";
 import {AddressService} from "../../../service/address.serivce";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
+import {AddAndEditAddressFormComponent} from "../../modalwindows/add-and-edit-address-form/add-and-edit-address-form.component";
 
 @Component({
   selector: 'app-contact-addresses',
@@ -16,14 +18,20 @@ export class ContactAddressesComponent implements OnInit, OnDestroy {
   private subscriptions: Subscription[] = [];
 
 
-  constructor(private addressService: AddressService, private route: ActivatedRoute) {
+  constructor(private addressService: AddressService, private route: ActivatedRoute, private modalService: NgbModal) {
   }
 
   ngOnInit(): void {
     this.getAllAddresses();
   }
 
-  open() {
+  openAddModalWindow() {
+    const contactId = Number(this.route.snapshot.paramMap.get('id'));
+    const modalRef = this.modalService.open(AddAndEditAddressFormComponent);
+
+    modalRef.componentInstance.contactId = contactId;
+    modalRef.componentInstance.artOfForm = "Add your address";
+    modalRef.closed.subscribe(value => this.addresses?.push(value));
   }
 
   private getAllAddresses() {
