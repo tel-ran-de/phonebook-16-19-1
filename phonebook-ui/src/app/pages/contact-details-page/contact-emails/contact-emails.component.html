@@ -10,7 +10,8 @@
 
   <div class="card-body overflow-auto" style="max-height: 150px">
     <ng-template [ngIf]="emails">
-      <app-email-element *ngFor="let email of emails | sortByFavorite" [email]="email"></app-email-element>
+      <app-email-element *ngFor="let email of emails | sortByFavorite" [email]="email"
+                         (childButtonClick)="deleteEmail($event)"></app-email-element>
     </ng-template>
   </div>
 
