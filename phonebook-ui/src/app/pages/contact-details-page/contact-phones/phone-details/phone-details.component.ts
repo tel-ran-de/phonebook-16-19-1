@@ -30,5 +30,6 @@ export class PhoneDetailsComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

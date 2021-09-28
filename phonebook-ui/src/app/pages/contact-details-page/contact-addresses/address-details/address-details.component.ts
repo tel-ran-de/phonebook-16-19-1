@@ -1,4 +1,6 @@
-import {Component, Input,} from '@angular/core';
+import {Component, EventEmitter, Input, OnDestroy, Output,} from '@angular/core';
+import {Subscription} from 'rxjs';
+import {AddressService} from 'src/app/service/address.serivce';
 import {Address} from "../../../../model/address";
 
 @Component({
@@ -28,5 +30,6 @@ export class AddressDetailsComponent implements OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }
