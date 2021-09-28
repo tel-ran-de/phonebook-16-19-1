@@ -4,6 +4,7 @@ import {Email} from "../../../model/email";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Subscription} from "rxjs";
+import {ToastService} from "../../../service/toast.service";
 
 @Component({
   selector: 'app-contact-emails',
@@ -14,11 +15,10 @@ export class ContactEmailsComponent implements OnInit, OnDestroy {
 
   emails: Email[] | undefined;
   getAllEmailsErrorMessage: string | undefined;
-  deleteEmailErrorMessage: string | undefined;
 
   private subscriptions: Subscription[] = [];
 
-  constructor(private emailService: EmailService, private route: ActivatedRoute) {
+  constructor(private emailService: EmailService, private route: ActivatedRoute, private toastService: ToastService) {
   }
 
   ngOnInit(): void {
@@ -50,7 +50,11 @@ export class ContactEmailsComponent implements OnInit, OnDestroy {
           this.emails = this.emails!.filter(h => h !== event)
         ,
         () =>
-          this.deleteEmailErrorMessage = 'something went wrong with delete process'
+          this.toastService.show('something went wrong with deleting email',
+            {
+              classname: 'bg-danger text-light mt-5',
+              delay: 5000
+            })
         );
 
     this.subscriptions.push(deleteEmailSubscribe);
