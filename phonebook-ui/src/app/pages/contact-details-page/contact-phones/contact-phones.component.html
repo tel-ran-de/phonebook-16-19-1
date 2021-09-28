@@ -11,7 +11,9 @@
   </div>
   <div class="card-body overflow-auto" style="max-height: 150px">
     <ng-template [ngIf]="phones">
-      <app-phone-details *ngFor="let phone of phones | sortByFavorite" [phone]="phone"></app-phone-details>
+      <app-phone-details *ngFor="let phone of phones | sortByFavorite"
+                         [phone]="phone"
+                         (phoneDeleted)="deletePhone($event)"></app-phone-details>
     </ng-template>
   </div>
 </div>
