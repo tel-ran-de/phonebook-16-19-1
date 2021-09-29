@@ -79,7 +79,7 @@ public class RepoIntegration {
     }
 
     private void addEmail(Contact contact) {
-        Email email = new Email("validEmail@save.com", true, contact);
+        Email email = new Email("validemail@save.com", true, contact);
 
         entityManager.persist(email);
         flushAndClear();

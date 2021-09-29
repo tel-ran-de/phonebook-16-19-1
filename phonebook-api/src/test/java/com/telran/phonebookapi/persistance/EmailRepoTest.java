@@ -1,6 +1,5 @@
 package com.telran.phonebookapi.persistance;
 
-import com.telran.phonebookapi.entity.Address;
 import com.telran.phonebookapi.entity.Contact;
 import com.telran.phonebookapi.entity.Email;
 import com.telran.phonebookapi.entity.Group;
@@ -25,7 +24,7 @@ class EmailRepoTest {
     @Test
     public void testAdd_addAddressToContact_oneRecordFound() {
         Contact contact = new Contact("Mikhail", "Bolender", 30, true, Group.HOME);
-        Email email = new Email("validEmail@save.com", true, contact);
+        Email email = new Email("validemail@save.com", true, contact);
 
         entityManager.persist(contact);
         entityManager.persist(email);
@@ -61,7 +60,7 @@ class EmailRepoTest {
         Contact contact1 = new Contact("Mikhail", "Bolender",
                 30, false, Group.HOME);
         Contact contact2 = new Contact("Marina", "Mitunevich", 29, true, Group.HOME);
-        Email email1 = new Email("validEmail@save.com", false, contact1);
+        Email email1 = new Email("validemail@save.com", false, contact1);
         Email email2 = new Email("marina@mail.com", false, contact1);
         Email email3 = new Email("new@save.com", true, contact2);
 
