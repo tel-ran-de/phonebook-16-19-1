@@ -21,4 +21,9 @@ export class PhoneService {
     return this.httpClient.get<Phone[]>(url)
   }
 
+  deletePhone(id: number): Observable<void> {
+    const url = `${this.phonePath}/${id}`
+    return this.httpClient.delete<void>(url);
+  }
+
 }

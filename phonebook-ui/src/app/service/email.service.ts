@@ -30,4 +30,9 @@ export class EmailService {
     const url = `${this.emailPath}/${email.id}`;
     return this.httpClient.put<void>(url, email, this.httpOptions);
   }
+
+  deleteEmail(id: number): Observable<void> {
+    const url = `${this.emailPath}/${id}`;
+    return this.httpClient.delete<void>(url);
+  }
 }

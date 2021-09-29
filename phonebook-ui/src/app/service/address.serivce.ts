@@ -16,9 +16,23 @@ export class AddressService {
   constructor(private httpClient: HttpClient) {
   }
 
-  getAll(contactId: number): Observable<Address[]> {
-    const url = `${this.addressPath}/${contactId}/all`;
+  getAll(addressId: number): Observable<Address[]> {
+    const url = `${this.addressPath}/${addressId}/all`;
     return this.httpClient.get<Address[]>(url)
   }
 
+  addAddress(address: Address): Observable<Address> {
+    return this.httpClient.post<Address>(this.addressPath, address, this.httpOptions);
+  }
+
+  editAddress(address: Address): Observable<void> {
+
+    const url = `${this.addressPath}/${address.id}`;
+    return this.httpClient.put<void>(url, address, this.httpOptions);
+  }
+
+  deleteAddress(id: number): Observable<void> {
+    const url = `${this.addressPath}/${id}`
+    return this.httpClient.delete<void>(url);
+  }
 }
