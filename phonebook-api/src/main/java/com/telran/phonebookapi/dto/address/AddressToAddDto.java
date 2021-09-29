@@ -3,8 +3,8 @@ package com.telran.phonebookapi.dto.address;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Positive;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -19,6 +19,6 @@ public class AddressToAddDto {
     @NotBlank(message = "{validation.index.default}")
     public String index;
     public boolean isFavorite;
-    @Min(message = "{validation.contactId.default}", value = 0L)
+    @Positive(message = "{validation.contactId.default}")
     public long contactId;
 }

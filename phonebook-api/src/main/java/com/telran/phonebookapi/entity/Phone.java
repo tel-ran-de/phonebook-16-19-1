@@ -6,6 +6,9 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 import java.util.Objects;
 
 @Entity
@@ -18,9 +21,14 @@ public class Phone {
     private long id;
 
     @Setter
+    @NotBlank(message = "{validation.countyCode.default}")
+    @Size(max = 10, message = "{validation.telephoneCodeLength.default}")
     private String countryCode;
 
     @Setter
+    @NotBlank(message = "{validation.telephoneNumber.default}")
+    @Pattern(regexp = "^[0-9]+$", message = "{validation.telephoneNumberPattern.default}")
+    @Size(min = 5, max = 30, message = "{validation.telephoneNumberLength.default}" )
     private String telephoneNumber;
 
     @Setter

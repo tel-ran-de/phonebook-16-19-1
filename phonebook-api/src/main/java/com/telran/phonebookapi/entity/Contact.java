@@ -1,12 +1,14 @@
 package com.telran.phonebookapi.entity;
 
 
+import com.telran.phonebookapi.validation.MinMax;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -22,12 +24,15 @@ public class Contact {
     private long id;
 
     @Setter
+    @NotBlank(message = "{validation.firstname.default}")
     private String firstName;
 
     @Setter
+    @NotBlank(message = "{validation.lastname.default}")
     private String lastName;
 
     @Setter
+    @MinMax(minAge = 1, maxAge = 120, message = "{validation.age.default}" )
     private int age;
 
     @Setter

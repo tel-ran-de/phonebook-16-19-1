@@ -10,7 +10,7 @@ import java.lang.annotation.*;
 @Constraint(validatedBy = MinMaxValidator.class)
 public @interface MinMax {
 
-    String message() default "{validation.age.default}";
+    String message() default "invalid value of the age must be from 1 bis 120";
 
     int minAge() default Integer.MIN_VALUE;
 

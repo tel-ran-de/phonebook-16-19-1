@@ -14,7 +14,7 @@ public class ContactToEditDto {
     public String firstName;
     @NotBlank(message = "{validation.lastname.default}")
     public String lastName;
-    @MinMax(minAge = 1,maxAge = 120,message = "age should be between 0 and 120")
+    @MinMax(minAge = 1,maxAge = 120,message = "{validation.age.default}")
     public int age;
     public boolean isFavorite;
     @NotBlank(message = "{validation.group.default}")

@@ -8,6 +8,6 @@ import lombok.NoArgsConstructor;
 public class FieldErrorDto {
 
     public String field;
-    public String errorMessage;
+    public String message;
 
 }

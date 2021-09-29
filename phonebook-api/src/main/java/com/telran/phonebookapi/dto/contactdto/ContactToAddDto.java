@@ -15,7 +15,7 @@ public class ContactToAddDto {
     public String firstName;
     @NotBlank(message = "{validation.lastname.default}")
     public String lastName;
-    @MinMax(minAge = 1, maxAge = 120)
+    @MinMax(minAge = 1, maxAge = 120, message = "{validation.age.default}" )
     public int age;
     public boolean isFavorite;
     @NotBlank(message = "{validation.group.default}")

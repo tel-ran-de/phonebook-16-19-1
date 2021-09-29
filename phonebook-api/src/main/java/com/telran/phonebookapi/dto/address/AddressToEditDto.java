@@ -8,7 +8,7 @@ import javax.validation.constraints.NotBlank;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AddressToEditDto {
-    public long id;
+
     @NotBlank(message = "{validation.country.default}")
     public String country;
     @NotBlank(message = "{validation.city.default}")
