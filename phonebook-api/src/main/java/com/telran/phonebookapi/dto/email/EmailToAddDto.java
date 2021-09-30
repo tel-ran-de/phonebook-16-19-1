@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 @AllArgsConstructor
@@ -13,7 +12,6 @@ import javax.validation.constraints.Positive;
 public class EmailToAddDto {
 
     @Email(message = "{validation.emailPattern.default}")
-    @NotNull
     @NotBlank(message = "{validation.email.default}")
     public String email;
     public boolean isFavorite;
