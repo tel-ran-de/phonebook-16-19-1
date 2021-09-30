@@ -8,6 +8,7 @@ import com.telran.phonebookapi.mapper.PhoneMapper;
 import com.telran.phonebookapi.service.PhoneService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,7 +24,7 @@ public class PhoneController {
     }
 
     @PostMapping
-    public PhoneToDisplayDto add(@RequestBody PhoneToAddDto phoneToAddDto) {
+    public PhoneToDisplayDto add(@RequestBody @Valid PhoneToAddDto phoneToAddDto) {
         Phone phone = phoneService.addPhone(
                 phoneToAddDto.countryCode,
                 phoneToAddDto.telephoneNumber,
@@ -33,7 +34,7 @@ public class PhoneController {
     }
 
     @PutMapping("/{id}")
-    public void edit(@RequestBody PhoneToEditDto phoneToEditDto, @PathVariable(name = "id") long phoneId) {
+    public void edit(@RequestBody @Valid PhoneToEditDto phoneToEditDto, @PathVariable(name = "id") long phoneId) {
 
         phoneService.editById(
                 phoneToEditDto.countryCode,

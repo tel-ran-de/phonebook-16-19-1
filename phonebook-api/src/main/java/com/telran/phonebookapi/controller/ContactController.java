@@ -9,6 +9,7 @@ import com.telran.phonebookapi.mapper.ContactMapper;
 import com.telran.phonebookapi.service.ContactService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -32,7 +33,7 @@ public class ContactController {
     }
 
     @PostMapping
-    public ContactToDisplayDto add(@RequestBody ContactToAddDto contactToAdd) {
+    public ContactToDisplayDto add(@RequestBody @Valid ContactToAddDto contactToAdd) {
 
         Contact contact = contactService.add(contactToAdd.firstName, contactToAdd.lastName, contactToAdd.age,
                 contactToAdd.isFavorite, Group.valueOf(contactToAdd.group.toUpperCase()));

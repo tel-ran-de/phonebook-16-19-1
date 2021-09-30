@@ -3,6 +3,7 @@ package com.telran.phonebookapi.entity;
 import lombok.*;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
 
 @Entity
@@ -15,15 +16,19 @@ public class Address {
     private long id;
 
     @Setter
+    @NotBlank(message = "{validation.country.default}")
     private String country;
 
     @Setter
+    @NotBlank(message = "{validation.city.default}")
     private String city;
 
     @Setter
+    @NotBlank(message = "{validation.address.default}")
     private String address;
 
     @Setter
+    @NotBlank(message = "{validation.index.default}")
     private String index;
 
     @Setter

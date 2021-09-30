@@ -128,7 +128,7 @@ public class EmailServiceTest {
     }
 
     @Test
-    public void testAddAddress_contactNotFound() {
+    public void testAddEmail_contactNotFound() {
 
         Exception exception = assertThrows(ContactNotFoundException.class,
                 () -> emailService.addEmail("falco@gmail.com", true, 20L));
@@ -136,4 +136,25 @@ public class EmailServiceTest {
         assertEquals("required contact is not found", exception.getMessage());
     }
 
+    @Test
+    public void testAddEmail_emailCamelCase_saveLowerCase(){
+
+        when(contactRepo.findById(2L)).thenReturn(Optional.of(new Contact("marina2", "bergner", 20,
+                true, Group.HOME)));
+
+        emailService.addEmail("FALCO@GmaiL.Com", true, 2L);
+        verify(emailRepo, times(1))
+                .save(argThat(argument -> argument.getEmail().equals("falco@gmail.com")));
+    }
+
+    @Test
+    public void testAddEmail_emailTrim_saveLowerCase(){
+
+        when(contactRepo.findById(2L)).thenReturn(Optional.of(new Contact("marina2", "bergner", 20,
+                true, Group.HOME)));
+
+        emailService.addEmail(" FALCO@GmaiL.Com \n", true, 2L);
+        verify(emailRepo, times(1))
+                .save(argThat(argument -> argument.getEmail().equals("falco@gmail.com")));
+    }
 }

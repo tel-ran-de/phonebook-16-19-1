@@ -30,9 +30,11 @@ dependencies {
     annotationProcessor 'org.projectlombok:lombok:1.18.20'
 
     implementation group: 'org.postgresql', name: 'postgresql', version: '42.2.23'
+    implementation group: 'org.springframework.boot', name: 'spring-boot-starter-validation', version: '2.5.5'
 
     testImplementation 'org.springframework.boot:spring-boot-starter-test:2.5.4'
     testImplementation group: 'com.h2database', name: 'h2', version: '1.4.200'
+
 }
 
 test {

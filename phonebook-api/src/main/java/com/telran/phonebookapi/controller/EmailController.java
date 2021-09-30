@@ -8,6 +8,7 @@ import com.telran.phonebookapi.mapper.EmailMapper;
 import com.telran.phonebookapi.service.EmailService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -23,13 +24,13 @@ public class EmailController {
     }
 
     @PostMapping
-    public EmailToDisplayDto add(@RequestBody EmailToAddDto emailToAddDto) {
+    public EmailToDisplayDto add(@RequestBody @Valid EmailToAddDto emailToAddDto) {
         Email email = emailService.addEmail(emailToAddDto.email, emailToAddDto.isFavorite, emailToAddDto.contactId);
         return emailMapper.toDisplayDto(email);
     }
 
     @PutMapping("/{id}")
-    public void edit(@RequestBody EmailToEditDto toEditDto, @PathVariable(name = "id") long emailId) {
+    public void edit(@RequestBody @Valid EmailToEditDto toEditDto, @PathVariable(name = "id") long emailId) {
         emailService.editEmailById(toEditDto.email, toEditDto.isFavorite, emailId);
     }
 
