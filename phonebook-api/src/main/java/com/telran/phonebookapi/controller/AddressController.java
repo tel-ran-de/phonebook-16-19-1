@@ -8,6 +8,7 @@ import com.telran.phonebookapi.mapper.AddressMapper;
 import com.telran.phonebookapi.service.AddressService;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,14 +26,14 @@ public class AddressController {
     }
 
     @PostMapping
-    public AddressToDisplayDto add(@RequestBody AddressToAddDto addressToAdd) {
+    public AddressToDisplayDto add(@RequestBody @Valid AddressToAddDto addressToAdd) {
         Address address = addressService.addAddress(addressToAdd.country, addressToAdd.city, addressToAdd.address, addressToAdd.index,
                 addressToAdd.isFavorite, addressToAdd.contactId);
         return addressMapper.toDto(address);
     }
 
     @PutMapping("/{id}")
-    public void edit(@RequestBody AddressToEditDto addressToAdd, @PathVariable(name = "id") long addressId) {
+    public void edit(@RequestBody @Valid AddressToEditDto addressToAdd, @PathVariable(name = "id") long addressId) {
         addressService.editAddressById(addressToAdd.country, addressToAdd.city, addressToAdd.address, addressToAdd.index,
                 addressToAdd.isFavorite, addressId);
     }

@@ -4,7 +4,6 @@ import com.telran.phonebookapi.entity.Contact;
 import com.telran.phonebookapi.entity.Email;
 import com.telran.phonebookapi.repo.IContactRepo;
 import com.telran.phonebookapi.repo.IEmailRepo;
-import com.telran.phonebookapi.service.exceptions.AddressNotFoundException;
 import com.telran.phonebookapi.service.exceptions.ContactNotFoundException;
 import com.telran.phonebookapi.service.exceptions.EmailNotFountException;
 import org.springframework.stereotype.Service;
@@ -46,7 +45,7 @@ public class EmailService {
 
         Contact contact = contactRepo.findById(contactId)
                 .orElseThrow(() -> new ContactNotFoundException(CONTACT_NOT_FOUND));
-        Email newEmail = new Email(email, isFavorite, contact);
+        Email newEmail = new Email(email.toLowerCase().trim(), isFavorite, contact);
         return emailRepo.save(newEmail);
     }
 
