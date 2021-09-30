@@ -3,7 +3,7 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
     id "io.swagger.core.v3.swagger-gradle-plugin" version "2.1.4"
-    id "org.flywaydb.flyway" version "8.0.0-beta3"
+    id "org.flywaydb.flyway" version "6.5.7"
 }
 
 group = 'com.telran'
@@ -19,13 +19,11 @@ configurations {
 repositories {
     mavenCentral()
 }
-flyway{
-    url= 'jdbc:postgresql://localhost:5432/contacts_phonebook_db'
-    user = 'postgres'
-    password= 300990
-}
+
 
 dependencies {
+    compile "org.flywaydb:flyway-core:6.5.7"
+
     implementation 'org.springframework.boot:spring-boot-starter-data-jpa:2.5.4'
     implementation 'org.springframework.boot:spring-boot-starter-web:2.5.4'
     compileOnly 'org.projectlombok:lombok:1.18.20'
