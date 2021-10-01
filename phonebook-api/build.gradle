@@ -3,7 +3,6 @@ plugins {
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
     id "io.swagger.core.v3.swagger-gradle-plugin" version "2.1.4"
-    id "org.flywaydb.flyway" version "6.5.7"
 }
 
 group = 'com.telran'
