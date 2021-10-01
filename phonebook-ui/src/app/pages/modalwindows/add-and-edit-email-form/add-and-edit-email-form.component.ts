@@ -37,7 +37,7 @@ export class AddAndEditEmailFormComponent implements OnInit, OnDestroy {
 
     this.emailForm = this.fb.group({
       'id': [null],
-      'email': [null, [Validators.required, Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,3}$')]],
+      'email': [null, [Validators.required, Validators.pattern('[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\\.[a-zA-Z]{2,3}$')]],
       'isFavorite': [null],
       'contactId': [this.contactId],
     });
