@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 })
 export class EmailService {
 
-  private readonly emailPath = 'api/email';
+  private readonly emailPath = 'api/emails';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
@@ -17,22 +17,22 @@ export class EmailService {
   constructor(private httpClient: HttpClient) {
   }
 
+  add(email: Email): Observable<Email> {
+    return this.httpClient.post<Email>(this.emailPath, email, this.httpOptions);
+  }
+
+  edit(email: Email): Observable<void> {
+    const url = `${this.emailPath}/${email.id}`;
+    return this.httpClient.put<void>(url, email, this.httpOptions);
+  }
+
   getAll(contactId: number): Observable<Email[]> {
     const url = `${this.emailPath}/${contactId}/all`;
     return this.httpClient.get<Email[]>(url)
   }
 
-  addEmail(email: Email): Observable<Email> {
-    return this.httpClient.post<Email>(this.emailPath, email, this.httpOptions);
-  }
-
-  editEmail(email: Email): Observable<void> {
-    const url = `${this.emailPath}/${email.id}`;
-    return this.httpClient.put<void>(url, email, this.httpOptions);
-  }
-
-  deleteEmail(id: number): Observable<void> {
-    const url = `${this.emailPath}/${id}`;
+  delete(emailId: number): Observable<void> {
+    const url = `${this.emailPath}/${emailId}`;
     return this.httpClient.delete<void>(url);
   }
 }

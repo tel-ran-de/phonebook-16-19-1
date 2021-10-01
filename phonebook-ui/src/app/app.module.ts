@@ -27,6 +27,7 @@ import {AddAndEditAddressFormComponent} from './pages/modalwindows/add-and-edit-
 import {ToastsContainer} from './pages/toasts/toasts.component';
 import {AddAndEditEmailFormComponent} from './pages/modalwindows/add-and-edit-email-form/add-and-edit-email-form.component';
 import {AddAndEditPhoneFormComponent} from './pages/modalwindows/add-and-edit-phone-form/add-and-edit-phone-form.component';
+import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import {AddAndEditPhoneFormComponent} from './pages/modalwindows/add-and-edit-ph
     AddAndEditEmailFormComponent,
     AddAndEditAddressFormComponent,
     ToastsContainer,
-    AddAndEditPhoneFormComponent
+    AddAndEditPhoneFormComponent,
+    PageNotFoundComponent
   ],
   imports: [
     ReactiveFormsModule,

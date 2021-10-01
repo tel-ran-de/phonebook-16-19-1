@@ -1,6 +1,5 @@
 package com.telran.phonebookapi.persistance;
 
-import com.telran.phonebookapi.entity.Address;
 import com.telran.phonebookapi.entity.Contact;
 import com.telran.phonebookapi.entity.Email;
 import com.telran.phonebookapi.entity.Group;

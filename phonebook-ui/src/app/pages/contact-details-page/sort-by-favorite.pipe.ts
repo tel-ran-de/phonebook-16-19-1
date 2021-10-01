@@ -5,7 +5,8 @@ import {Address} from "../../model/address";
 import {Email} from "../../model/email";
 
 @Pipe({
-  name: 'sortByFavorite'
+  name: 'sortByFavorite',
+  pure: false
 })
 export class SortByFavoritePipe implements PipeTransform {
 
@@ -13,6 +14,6 @@ export class SortByFavoritePipe implements PipeTransform {
     if (!value)
       return [];
 
-    return value.sort(a => a.isFavorite ? 1 : -1);
+    return value.sort(a => a.isFavorite ? -1 : 1);
   }
 }

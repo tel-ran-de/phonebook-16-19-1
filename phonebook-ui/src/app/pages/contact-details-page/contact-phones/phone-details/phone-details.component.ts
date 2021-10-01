@@ -2,6 +2,7 @@ import {Component, EventEmitter, Input, OnDestroy, Output,} from '@angular/core'
 import {Phone} from "../../../../model/phone";
 import {Subscription} from "rxjs";
 import {PhoneService} from "../../../../service/phone.service";
+import {httpErrorHandler} from "../../../../httpErrorHandle";
 
 @Component({
   selector: 'app-phone-details',
@@ -10,22 +11,26 @@ import {PhoneService} from "../../../../service/phone.service";
 })
 export class PhoneDetailsComponent implements OnDestroy {
 
-  errorStatus: String | undefined;
-  subscriptions: Subscription[] = [];
-
   @Input()
   phone: Phone | undefined;
   @Output()
   phoneDeleted: EventEmitter<Phone> = new EventEmitter<Phone>();
 
+
+  errorMessage: String | undefined;
+  private subscriptions: Subscription[] = [];
+
   constructor(private phoneService: PhoneService) {
   }
 
   onClickDelete() {
-    this.errorStatus = undefined;
+
+    this.errorMessage = undefined;
+
     const deletePhoneSubscribe = this.phoneService.deletePhone(this.phone!.id)
       .subscribe(_ => this.phoneDeleted.emit(this.phone),
-        () => this.errorStatus = "something went wrong deleting phone");
+        error => this.errorMessage = httpErrorHandler(error));
+
     this.subscriptions.push(deletePhoneSubscribe)
   }
 

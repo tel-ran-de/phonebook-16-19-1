@@ -6,7 +6,9 @@ import lombok.NonNull;
 import lombok.Setter;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Objects;
+
 
 @Entity
 @Getter
@@ -17,7 +19,10 @@ public class Email {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
+
     @Setter
+    @com.telran.phonebookapi.validation.Email(message = "{validation.emailPattern.default}")
+    @NotBlank(message = "{validation.email.default}")
     private String email;
 
     @Setter
