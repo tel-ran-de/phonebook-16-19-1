@@ -4,6 +4,8 @@ import {PhoneService} from "../../../service/phone.service";
 import {ActivatedRoute} from "@angular/router";
 import {HttpErrorResponse} from "@angular/common/http";
 import {Subscription} from "rxjs";
+import {AddAndEditPhoneFormComponent} from "../../modalwindows/add-and-edit-phone-form/add-and-edit-phone-form.component";
+import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 
 @Component({
   selector: 'app-contact-phones',
@@ -20,9 +22,6 @@ export class ContactPhonesComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAllPhones();
-  }
-
-  open() {
   }
 
   private getAllPhones() {

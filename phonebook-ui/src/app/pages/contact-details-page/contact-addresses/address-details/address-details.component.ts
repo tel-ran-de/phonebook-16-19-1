@@ -6,7 +6,6 @@ import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
 import {AddAndEditAddressFormComponent} from "../../../modalwindows/add-and-edit-address-form/add-and-edit-address-form.component";
 import {ToastService} from "../../../../service/toast.service";
 
-
 @Component({
   selector: 'app-address-details',
   templateUrl: './address-details.component.html',
