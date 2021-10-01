@@ -4,6 +4,7 @@ import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Subscription} from "rxjs";
 import {Address} from "../../../model/address";
 import {AddressService} from "../../../service/address.serivce";
+import {httpErrorHandler} from "../../../httpErrorHandle";
 
 @Component({
   selector: 'app-add-and-edit-address-form',
@@ -16,24 +17,26 @@ export class AddAndEditAddressFormComponent implements OnInit, OnDestroy {
   address: Address | undefined;
   @Input()
   contactId: number | undefined;
-  addressForm: FormGroup | undefined;
-  errorStatus: String | undefined;
-  subscriptions: Subscription[] = [];
   @Input()
   artOfForm: String | undefined;
 
-  constructor(public activeModal: NgbActiveModal, private addressService: AddressService,
+  addressForm: FormGroup | undefined;
+  errorMessage: String | undefined;
+  private subscriptions: Subscription[] = [];
+
+  constructor(public activeModal: NgbActiveModal,
+              private addressService: AddressService,
               private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
-
     this.initForm();
+
     if (this.address)
       this.setFormValue();
   }
 
-  private initForm() {
+  private initForm(): void {
 
     this.addressForm = this.fb.group({
       'id': [null],
@@ -46,7 +49,7 @@ export class AddAndEditAddressFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  private setFormValue() {
+  private setFormValue(): void {
 
     this.addressForm!.controls.country.setValue(this.address!.country);
     this.addressForm!.controls.city.setValue(this.address!.city);
@@ -54,53 +57,42 @@ export class AddAndEditAddressFormComponent implements OnInit, OnDestroy {
     this.addressForm!.controls.id.setValue(this.address!.id);
     this.addressForm!.controls.isFavorite.setValue(this.address!.isFavorite);
     this.addressForm!.controls.index.setValue(this.address!.index);
+
     // alternative way to set all value
     // this.addressForm?.setValue(this.address!);
-
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
-    this.errorStatus = undefined;
+    this.errorMessage = undefined;
 
-    if (this.artOfForm === "Edit your address") {
+    if (this.address)
       this.editAddress();
-    } else {
+    else
       this.addAddress();
-    }
   }
 
-  private editAddress() {
+  private editAddress(): void {
 
     const editAddress = this.addressForm?.value;
 
-    const getEditAddressSubscribe = this.addressService.editAddress(editAddress)
-      .subscribe(
-        value =>
-          this.activeModal.close(editAddress)
-        ,
-        error =>
-          this.errorStatus = 'something went wrong with process of editing your address'
-      );
+    const getEditAddressSubscribe = this.addressService.edit(editAddress)
+      .subscribe(_ => this.activeModal.close(editAddress),
+        error => this.errorMessage = httpErrorHandler(error));
 
     this.subscriptions.push(getEditAddressSubscribe);
   }
 
-  private addAddress() {
+  private addAddress(): void {
 
-    const getAddAddressSubscribe = this.addressService.addAddress(this.addressForm?.value)
-      .subscribe(value =>
-          this.activeModal.close(value)
-        ,
-        error =>
-          this.errorStatus = 'something went wrong with process of adding your address'
-      );
+    const getAddAddressSubscribe = this.addressService.add(this.addressForm?.value)
+      .subscribe(value => this.activeModal.close(value),
+        error => this.errorMessage = httpErrorHandler(error));
 
     this.subscriptions.push(getAddAddressSubscribe);
   }
 
-  ngOnDestroy() {
-
+  ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
 }

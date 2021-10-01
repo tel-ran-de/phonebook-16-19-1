@@ -5,6 +5,7 @@ import {ContactService} from "../../../service/contact.service";
 import {Router} from "@angular/router";
 import {Subscription} from "rxjs";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {httpErrorHandler} from "../../../httpErrorHandle";
 
 @Component({
   selector: 'app-add-and-edit-contact-form',
@@ -15,11 +16,12 @@ export class AddAndEditContactFormComponent implements OnInit, OnDestroy {
 
   @Input()
   contact: Contact | undefined;
-  profileForm: FormGroup | undefined;
-  errorStatus: String | undefined;
-  subscriptions: Subscription[] = [];
   @Input()
   artOfForm: String | undefined;
+
+  profileForm: FormGroup | undefined;
+  errorMessage: String | undefined;
+  private subscriptions: Subscription[] = [];
 
   constructor(public activeModal: NgbActiveModal,
               private contactService: ContactService,
@@ -28,75 +30,54 @@ export class AddAndEditContactFormComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
     this.initForm();
+
     if (this.contact)
-      this.setFormValues();
+      this.profileForm?.setValue(this.contact);
   }
 
-  onSubmit() {
+  onSubmit(): void {
 
-    this.errorStatus = undefined;
+    this.errorMessage = undefined;
 
-    if (this.artOfForm === "Edit your contact") {
+    if (this.contact)
       this.editContact();
-    } else {
+    else
       this.addContact();
-    }
   }
 
-  private setFormValues() {
-
-    this.profileForm?.controls.firstName.setValue(this.contact?.firstName);
-    this.profileForm?.controls.lastName.setValue(this.contact?.lastName);
-    this.profileForm?.controls.age.setValue(this.contact?.age);
-    this.profileForm?.controls.id.setValue(this.contact?.id);
-    this.profileForm?.controls.isFavorite.setValue(this.contact?.isFavorite);
-    this.profileForm?.controls.group.setValue(this.contact?.group);
-  }
-
-  private initForm() {
-
+  private initForm(): void {
     this.profileForm = this.fb.group({
       'id': [null],
       'firstName': [null, [Validators.required]],
       'lastName': [null, [Validators.required]],
-      'age': [1, [Validators.required, Validators.min(1), Validators.max(120)]],
+      'age': [18, [Validators.required, Validators.min(1), Validators.max(120)]],
       'isFavorite': [null],
       'group': ["home"]
     });
   }
 
-  private editContact() {
+  private editContact(): void {
 
     const editContact = this.profileForm?.value;
 
-    const getEditContactSubscribe = this.contactService.editContact(editContact)
-      .subscribe(
-        value => {
-          this.activeModal.close(editContact);
-        },
-        error => {
-          this.errorStatus = 'something went wrong with process of edit your contacts';
-        });
+    const getEditContactSubscribe = this.contactService.edit(editContact)
+      .subscribe(_ => this.activeModal.close(editContact),
+        error => this.errorMessage = httpErrorHandler(error));
 
     this.subscriptions.push(getEditContactSubscribe);
   }
 
-  private addContact() {
+  private addContact(): void {
 
-    const getAddContactSubscribe = this.contactService.addContact(this.profileForm?.value)
-      .subscribe(value => {
-          this.callBackOk(value)
-        },
-        error => {
-          this.errorStatus = 'something went wrong with process of adding your contacts';
-        });
+    const getAddContactSubscribe = this.contactService.add(this.profileForm?.value)
+      .subscribe(value => this.callBackOk(value),
+        error => this.errorMessage = httpErrorHandler(error));
 
     this.subscriptions.push(getAddContactSubscribe);
   }
 
-  private callBackOk(value: Contact) {
+  private callBackOk(value: Contact): void {
 
     const url = `contacts/${value.id}`;
 
@@ -105,7 +86,7 @@ export class AddAndEditContactFormComponent implements OnInit, OnDestroy {
       this.router.navigate([url]));
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
 
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }

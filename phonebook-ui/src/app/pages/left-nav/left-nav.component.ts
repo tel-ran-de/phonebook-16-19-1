@@ -11,15 +11,13 @@ import {AddAndEditContactFormComponent} from "../modalwindows/add-and-edit-conta
 export class LeftNavComponent {
   headerElements: { url: string, label: string, icon: string }[] = [
     {label: 'Contacts', url: '/contacts', icon: 'bi bi-person-lines-fill'},
-    {label: 'Favorites', url: 'contacts/favorites', icon: 'bi bi-star'},
-    {label: 'Groups', url: 'contacts/groups', icon: 'bi bi-card-list'},
-    {label: 'Profile', url: 'contacts/profile', icon: 'bi bi-person-badge'},
+    {label: 'Favorites', url: '/favorites', icon: 'bi bi-star'},
+    {label: 'Groups', url: '/groups', icon: 'bi bi-card-list'},
+    {label: 'Profile', url: '/profile', icon: 'bi bi-person-badge'},
     {label: 'Logout', url: '/logout', icon: 'bi bi-box-arrow-right'}
   ];
 
   sidebarCollapsed = true;
-  private check:String | undefined;
-
 
   constructor(private router: Router,
               private modalService: NgbModal) {
@@ -36,7 +34,6 @@ export class LeftNavComponent {
 
   open() {
     const modalRef = this.modalService.open(AddAndEditContactFormComponent);
-     modalRef.componentInstance.artOfForm = "Add contact";
+    modalRef.componentInstance.artOfForm = "Add contact";
   }
-
 }

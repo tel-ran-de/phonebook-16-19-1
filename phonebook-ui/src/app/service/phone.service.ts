@@ -7,6 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class PhoneService {
+
   private readonly phonePath = 'api/phones';
 
   httpOptions = {
@@ -21,9 +22,8 @@ export class PhoneService {
     return this.httpClient.get<Phone[]>(url)
   }
 
-  deletePhone(id: number): Observable<void> {
-    const url = `${this.phonePath}/${id}`
+  deletePhone(phoneId: number): Observable<void> {
+    const url = `${this.phonePath}/${phoneId}`
     return this.httpClient.delete<void>(url);
   }
-
 }
