@@ -26,7 +26,7 @@ export class AddAndEditContactFormComponent implements OnInit, OnDestroy {
   constructor(public activeModal: NgbActiveModal,
               private contactService: ContactService,
               private router: Router,
-              private fb: FormBuilder,) {
+              private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
@@ -52,7 +52,7 @@ export class AddAndEditContactFormComponent implements OnInit, OnDestroy {
       'firstName': [null, [Validators.required]],
       'lastName': [null, [Validators.required]],
       'age': [18, [Validators.required, Validators.min(1), Validators.max(120)]],
-      'isFavorite': [null],
+      'isFavorite': [false],
       'group': ["home"]
     });
   }

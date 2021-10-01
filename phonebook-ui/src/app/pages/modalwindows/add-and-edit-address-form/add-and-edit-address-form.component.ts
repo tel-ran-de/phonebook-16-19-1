@@ -44,7 +44,7 @@ export class AddAndEditAddressFormComponent implements OnInit, OnDestroy {
       'city': [null, [Validators.required]],
       'address': [null, [Validators.required]],
       'index': [null, [Validators.required]],
-      'isFavorite': [null],
+      'isFavorite': [false],
       'contactId': [this.contactId],
     });
   }

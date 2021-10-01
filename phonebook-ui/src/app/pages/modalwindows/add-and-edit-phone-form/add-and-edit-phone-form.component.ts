@@ -48,7 +48,7 @@ export class AddAndEditPhoneFormComponent implements OnInit, OnDestroy {
       'id': [null],
       'countryCode': [defaultCC?.dial_code, [Validators.required]],
       'telephoneNumber': [null, [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(30), Validators.minLength(5)]],
-      'isFavorite': [null],
+      'isFavorite': [false],
       'contactId': [this.contactId]
     });
   }
