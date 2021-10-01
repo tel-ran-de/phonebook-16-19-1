@@ -7,10 +7,10 @@
 
 </div>
 
-<div class="col-sm-12 m-2" *ngIf="errorStatus">
+<div class="col-sm-12 m-2" *ngIf="errorMessage">
 
   <ngb-alert [dismissible]="false">
-    <strong>Warning! {{errorStatus}}</strong>
+    <strong>Warning! {{errorMessage}}</strong>
   </ngb-alert>
 
 </div>

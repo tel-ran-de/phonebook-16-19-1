@@ -4,6 +4,7 @@ import {Subscription} from "rxjs";
 import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {EmailService} from "../../../service/email.service";
 import {Email} from "../../../model/email";
+import {httpErrorHandler} from "../../../httpErrorHandle";
 
 @Component({
   selector: 'app-add-and-edit-email-form',
@@ -16,13 +17,15 @@ export class AddAndEditEmailFormComponent implements OnInit, OnDestroy {
   email: Email | undefined;
   @Input()
   contactId: number | undefined;
-  emailForm: FormGroup | undefined;
-  errorStatus: String | undefined;
-  subscriptions: Subscription[] = [];
   @Input()
   artOfForm: String | undefined;
 
-  constructor(public activeModal: NgbActiveModal, private emailService: EmailService,
+  emailForm: FormGroup | undefined;
+  errorMessage: String | undefined;
+  private subscriptions: Subscription[] = [];
+
+  constructor(public activeModal: NgbActiveModal,
+              private emailService: EmailService,
               private fb: FormBuilder) {
   }
 
@@ -30,10 +33,10 @@ export class AddAndEditEmailFormComponent implements OnInit, OnDestroy {
 
     this.initForm();
     if (this.email)
-      this.setFormValue();
+      this.emailForm!.setValue(this.email)
   }
 
-  private initForm() {
+  private initForm(): void {
 
     this.emailForm = this.fb.group({
       'id': [null],
@@ -43,57 +46,38 @@ export class AddAndEditEmailFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  private setFormValue() {
+  onSubmit(): void {
 
-    this.emailForm!.controls.email.setValue(this.email!.email);
-    this.emailForm!.controls.id.setValue(this.email!.id);
-    this.emailForm!.controls.isFavorite.setValue(this.email!.isFavorite);
-    //alternative way to set form with values
-    this.emailForm!.setValue(this.email!)
-  }
+    this.errorMessage = undefined;
 
-  onSubmit() {
-
-    this.errorStatus = undefined;
-
-    if (this.artOfForm === "Edit your email") {
+    if (this.email)
       this.editAddress();
-    } else {
+    else
       this.addAddress();
-    }
   }
 
-  private editAddress() {
+  private editAddress(): void {
 
     const editEmail = this.emailForm?.value;
 
-    const getEditEmailSubscribe = this.emailService.editEmail(editEmail)
-      .subscribe(
-        value =>
-          this.activeModal.close(editEmail)
-        ,
-        error =>
-          this.errorStatus = 'something went wrong with process of editing your email'
-        );
+    const getEditEmailSubscribe = this.emailService.edit(editEmail)
+      .subscribe(_ => this.activeModal.close(editEmail),
+        error => this.errorMessage = httpErrorHandler(error));
 
     this.subscriptions.push(getEditEmailSubscribe);
   }
 
-  private addAddress() {
+  private addAddress(): void {
 
-    const getAddEmailSubscribe = this.emailService.addEmail(this.emailForm?.value)
-      .subscribe(value =>
-          this.activeModal.close(value)
-        ,
-        error =>
-          this.errorStatus = 'something went wrong with process of adding your email'
-        );
+    const getAddEmailSubscribe = this.emailService.add(this.emailForm?.value)
+      .subscribe(value => this.activeModal.close(value),
+        error => this.errorMessage = httpErrorHandler(error));
 
     this.subscriptions.push(getAddEmailSubscribe);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
 
-    this.subscriptions.forEach((subscription) => subscription.unsubscribe());
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
   }
 }

@@ -35,9 +35,9 @@
 </div>
 <div class="modal-footer">
 
-  <div class="col-sm-12 mt-4" *ngIf="errorStatus">
+  <div class="col-sm-12 mt-4" *ngIf="errorMessage">
     <ngb-alert [dismissible]="false">
-      <strong>Warning! {{errorStatus}}</strong>
+      <strong>Warning! {{errorMessage}}</strong>
     </ngb-alert>
   </div>
 
