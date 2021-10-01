@@ -9,7 +9,8 @@
   <form class="row g-3 needs-validation" novalidate [formGroup]="phoneForm" (ngSubmit)="onSubmit()"
         *ngIf="phoneForm">
     <select class="form-select" formControlName="countryCode">
-      <option *ngFor="let country of countriesList" [value]="country.dial_code">{{country.name}} ({{country.dial_code}})
+      <option disabled selected>Choose your country code</option>
+      <option *ngFor="let country of countriesList" [ngValue]="country.dial_code">{{country.name}} ({{country.dial_code}})
       </option>
     </select>
     <div class="col-md-6">
@@ -37,9 +38,9 @@
 </div>
 <div class="modal-footer">
 
-  <div class="col-sm-12 mt-4" *ngIf="errorStatus">
+  <div class="col-sm-12 mt-4" *ngIf="errorMessage">
     <ngb-alert [dismissible]="false">
-      <strong>Warning! {{errorStatus}}</strong>
+      <strong>Warning! {{errorMessage}}</strong>
     </ngb-alert>
   </div>
 </div>

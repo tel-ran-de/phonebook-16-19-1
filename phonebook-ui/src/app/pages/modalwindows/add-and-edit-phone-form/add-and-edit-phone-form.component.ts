@@ -6,6 +6,7 @@ import {NgbActiveModal} from "@ng-bootstrap/ng-bootstrap";
 import {PhoneService} from "../../../service/phone.service";
 import {COUNTRIES} from "./countries";
 import {Country} from "../../../model/country";
+import {httpErrorHandler} from "../../../httpErrorHandle";
 
 @Component({
   selector: 'app-add-and-edit-phone-form',
@@ -18,13 +19,15 @@ export class AddAndEditPhoneFormComponent implements OnInit, OnDestroy {
   phone: Phone | undefined;
   @Input()
   contactId: number | undefined;
-  phoneForm: FormGroup | undefined;
-  errorStatus: String | undefined;
-  subscriptions: Subscription[] = [];
   @Input()
   artOfForm: String | undefined;
 
+  phoneForm: FormGroup | undefined;
+  errorMessage: String | undefined;
+  private subscriptions: Subscription[] = [];
+
   countriesList: Country[] = COUNTRIES;
+  selectedCountryCode = 'DE'
 
   constructor(public activeModal: NgbActiveModal,
               private phoneService: PhoneService,
@@ -35,14 +38,15 @@ export class AddAndEditPhoneFormComponent implements OnInit, OnDestroy {
     this.initForm();
     if (this.phone)
       this.setFormValue();
-
-    this.phoneForm!.valueChanges.subscribe(value => console.log(this.phoneForm?.controls))
   }
 
   private initForm() {
+    const selectedCountry = this.countriesList.find(value => value.code === this.selectedCountryCode.toUpperCase());
+    let defaultCC: Country | null = selectedCountry ? selectedCountry : null;
+
     this.phoneForm = this.fb.group({
       'id': [null],
-      'countryCode': [null, [Validators.required]],
+      'countryCode': [defaultCC?.dial_code, [Validators.required]],
       'telephoneNumber': [null, [Validators.required, Validators.pattern('^[0-9]+$'), Validators.maxLength(30), Validators.minLength(5)]],
       'isFavorite': [null],
       'contactId': [this.contactId]
@@ -59,23 +63,21 @@ export class AddAndEditPhoneFormComponent implements OnInit, OnDestroy {
 
   onSubmit() {
 
-    this.errorStatus = undefined;
+    this.errorMessage = undefined;
 
-    if (this.phone) {
+    if (this.phone)
       this.editPhone();
-    } else {
+    else
       this.addPhone();
-    }
   }
 
   private editPhone() {
     const editPhone = this.phoneForm?.value;
+
     const getEditPhoneSubscribe = this.phoneService.editPhone(editPhone)
-      .subscribe(
-        value => this.activeModal.close(editPhone)
-        ,
-        error => this.errorStatus = 'something went wrong with process of editing your phone'
-      );
+      .subscribe(_ => this.activeModal.close(editPhone),
+        error => this.errorMessage = httpErrorHandler(error));
+
     this.subscriptions.push(getEditPhoneSubscribe);
   }
 
@@ -83,7 +85,7 @@ export class AddAndEditPhoneFormComponent implements OnInit, OnDestroy {
 
     const addPhoneSubscribe = this.phoneService.addPhone(this.phoneForm?.value)
       .subscribe(value => this.activeModal.close(value),
-        error => this.errorStatus = 'something went wrong with process of adding your phone');
+        error => this.errorMessage = httpErrorHandler(error));
 
     this.subscriptions.push(addPhoneSubscribe);
   }
@@ -91,6 +93,4 @@ export class AddAndEditPhoneFormComponent implements OnInit, OnDestroy {
   ngOnDestroy(): void {
     this.subscriptions.forEach((subscription) => subscription.unsubscribe());
   }
-
-
 }
