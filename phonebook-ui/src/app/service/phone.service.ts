@@ -7,7 +7,7 @@ import {Observable} from "rxjs";
   providedIn: 'root'
 })
 export class PhoneService {
-  private readonly phonePath = 'api/phone';
+  private readonly phonePath = 'api/phones';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

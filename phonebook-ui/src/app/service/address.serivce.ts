@@ -7,7 +7,7 @@ import {Address} from "../model/address";
   providedIn: 'root'
 })
 export class AddressService {
-  private readonly addressPath = 'api/address';
+  private readonly addressPath = 'api/addresses';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})

@@ -8,7 +8,7 @@ import {Observable} from "rxjs";
 })
 export class EmailService {
 
-  private readonly emailPath = 'api/email';
+  private readonly emailPath = 'api/emails';
 
   httpOptions = {
     headers: new HttpHeaders({'Content-Type': 'application/json'})
