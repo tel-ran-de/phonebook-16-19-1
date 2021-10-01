@@ -1,7 +1,7 @@
 <div class="row" *ngIf="phone">
   <div class="col-md-1 col-sm-2 col-1">
     <div class="">
-      <i [ngClass]="phone.isFavorite ? 'bi bi-star' : 'bi bi-star-fill'"></i>
+      <i [ngClass]="!phone.isFavorite ? 'bi bi-star' : 'bi bi-star-fill'"></i>
     </div>
   </div>
   <div class="col-md-7 col-sm-6 col-10">
