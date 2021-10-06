@@ -8,6 +8,7 @@ const routes: Routes = [
   {path: '', redirectTo: '/contacts', pathMatch: 'full'},
   {path: 'contacts', component: ContactsComponent, pathMatch: 'full'},
   {path: 'contacts/:id', component: ContactDetailsPageComponent, pathMatch: 'full'},
+  {path: 'search', component: ContactsComponent, pathMatch: 'full'},
 
   {path: 'favorites', component: PageNotFoundComponent},
   {path: 'groups', component: PageNotFoundComponent},

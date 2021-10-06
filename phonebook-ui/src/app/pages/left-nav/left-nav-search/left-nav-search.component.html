@@ -1,12 +1,18 @@
-<form id="search-form">
+<form id="search-form" [formGroup]="searchForm" *ngIf="searchForm">
   <div class="input-group mb-3">
     <input type="search" class="form-control" placeholder="Search ..."
            name="searchTerm"
-           [(ngModel)]="searchTerm">
+           formControlName="searchContact">
+
     <div class="input-group-append">
-      <button type="submit" class="btn btn-outline-secondary" (click)="onClickSearch()">
+      <button type="submit" class="btn btn-outline-secondary" (click)="onClickSearch()" [disabled]="searchForm.invalid">
         <i class="bi bi-search"></i>
       </button>
     </div>
+    <div class="alert alert-danger col-sm-12"
+         *ngIf="searchForm.controls['searchContact'].invalid && searchForm.controls['searchContact'].touched ">
+      need to input min 3 symbols
+    </div>
   </div>
+
 </form>

@@ -1,29 +1,36 @@
-import {Component, EventEmitter, Output} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Router} from "@angular/router";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-left-nav-search',
   templateUrl: './left-nav-search.component.html',
   styleUrls: ['./left-nav-search.component.css']
 })
-export class LeftNavSearchComponent {
+export class LeftNavSearchComponent implements OnInit{
 
-  searchTerm: string = '';
-  @Output()
-  searchSubmitted: EventEmitter<void> = new EventEmitter<void>();
+  searchForm: FormGroup | undefined;
 
-  constructor() {
+  constructor(private router: Router, private fb: FormBuilder) {
+  }
+
+  ngOnInit(): void {
+
+    this.initForm();
   }
 
   onClickSearch() {
-    this.searchSubmitted.emit();
-    //перенавправить на страницу поиска (host/contacts/search?s=)
-    //указать в url в качестве параметра s поисковое значние из формы ввода.
-    //пример. В поиск введено "Max" тогда адрес будет host/contacts/search?s=Max
-    //
-    //компонент, который отображается по адресу выше должен уметь считывать параметры с url, сортировать список контактов,
-    //отображать отсортированные результаты
 
-    //выполнять поиск только когда введено миниму 3и символа
-    console.log(this.searchTerm);
+    const param = this.searchForm?.value.searchContact;
+    this.searchForm?.controls.searchContact.setValue('');
+    this.router.navigateByUrl('/', {skipLocationChange: true}).then(() =>
+      this.router.navigate(['search'],  { queryParams: { searchContact: param } }));
+  }
+
+  private initForm(): void {
+
+    this.searchForm = this.fb.group({
+      'searchContact': [ null, [Validators.minLength(3)]]
+    });
   }
 }

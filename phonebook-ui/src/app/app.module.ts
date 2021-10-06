@@ -52,7 +52,7 @@ import {PageNotFoundComponent} from './pages/page-not-found/page-not-found.compo
     AddAndEditAddressFormComponent,
     ToastsContainer,
     AddAndEditPhoneFormComponent,
-    PageNotFoundComponent
+    PageNotFoundComponent,
   ],
   imports: [
     ReactiveFormsModule,

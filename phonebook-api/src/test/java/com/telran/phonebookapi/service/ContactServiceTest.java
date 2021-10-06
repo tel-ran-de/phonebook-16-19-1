@@ -113,4 +113,12 @@ public class ContactServiceTest {
 
     }
 
+    @Test
+    public void testSearchByFirst() {
+
+        String search = "i";
+        contactService.searchByFirst(search);
+        verify(repo, times(1)).findAllByFirstNameContainsIgnoreCase(search);
+    }
+
 }
