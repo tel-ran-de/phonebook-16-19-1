@@ -48,4 +48,34 @@ class ContactRepoTest {
         List<Contact> repoAddress = (List<Contact>) contactRepo.findAll();
         assertEquals(0, repoAddress.size());
     }
+
+    @Test
+    public  void testSearchAllContactsByFirstAndLastName_successWithIgnoreCase(){
+        Contact contact = new Contact("Mikhail", "Bolender", 30, true, Group.HOME);
+
+        entityManager.persist(contact);
+        entityManager.flush();
+        entityManager.clear();
+
+        String term = "L";
+
+        List<Contact> contactsByLetter = contactRepo.findAllByFirstNameContainsIgnoreCase(term);
+        assertEquals(contact.getFirstName(),contactsByLetter.get(0).getFirstName());
+        assertEquals(contact.getLastName(), contactsByLetter.get(0).getLastName());
+    }
+
+    @Test
+    public  void testSearchAllContactsByFirstAndLastName_notSuccess(){
+        Contact contact = new Contact("Mikhail", "Bolender", 30, true, Group.HOME);
+
+        entityManager.persist(contact);
+        entityManager.flush();
+        entityManager.clear();
+
+        String term = "B";
+
+        List<Contact> contactsByLetter = contactRepo.findAllByFirstNameContainsIgnoreCase(term);
+        assertEquals(0,contactsByLetter.size());
+
+    }
 }

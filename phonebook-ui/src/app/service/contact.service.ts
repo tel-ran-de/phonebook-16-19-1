@@ -39,4 +39,9 @@ export class ContactService {
     const url = `${this.phoneBookUrl}/${contactId}`;
     return this.http.delete<void>(url);
   }
+
+  searchContacts(term: string): Observable<Contact[]> {
+    const url = `${this.phoneBookUrl}/search?searchContact=${term}`;
+    return this.http.get<Contact[]>(url);
+  }
 }

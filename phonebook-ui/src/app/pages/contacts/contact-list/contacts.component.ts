@@ -3,6 +3,7 @@ import {Contact} from "../../../model/contact";
 import {ContactService} from "../../../service/contact.service";
 import {Subscription} from "rxjs";
 import {httpErrorHandler} from "../../../httpErrorHandle";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-contacts',
@@ -15,12 +16,33 @@ export class ContactsComponent implements OnInit, OnDestroy {
   errorMessage: String | undefined;
   private subscriptions: Subscription[] = [];
 
-  constructor(private contactService: ContactService) {
+  constructor(private contactService: ContactService, private activatedRoute: ActivatedRoute) {
   }
 
   ngOnInit(): void {
 
-    this.getContacts();
+    const queryParamOfRout = this.activatedRoute.snapshot.queryParamMap.get('searchContact') ;
+
+    if(queryParamOfRout !== null){
+      this.searchContact(queryParamOfRout);
+    }else {
+      this.getContacts();
+    }
+  }
+
+  private searchContact(term: string):void{
+
+    this.errorMessage = undefined;
+    const searchContactSubscribe = this.contactService.searchContacts(term)
+      .subscribe(value => {
+        if(value.length !== 0) {
+          this.contacts = value;
+        }
+        else {
+          this.errorMessage = 'There is no Contacts'}
+      });
+
+    this.subscriptions.push(searchContactSubscribe);
   }
 
   private getContacts(): void {

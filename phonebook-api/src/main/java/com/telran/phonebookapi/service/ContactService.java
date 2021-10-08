@@ -57,4 +57,7 @@ public class ContactService {
         contactRepo.save(contact);
 
     }
+    public List<Contact> searchByFirst(String term){
+        return contactRepo.findAllByFirstNameContainsIgnoreCase(term);
+    }
 }

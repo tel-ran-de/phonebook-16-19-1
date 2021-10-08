@@ -7,5 +7,6 @@ import java.util.List;
 
 public interface IContactRepo extends CrudRepository<Contact, Long> {
     List<Contact> findAll();
+    List<Contact> findAllByFirstNameContainsIgnoreCase(String term);
 
 }

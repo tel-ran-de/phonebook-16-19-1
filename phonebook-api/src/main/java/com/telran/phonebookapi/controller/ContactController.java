@@ -9,6 +9,7 @@ import com.telran.phonebookapi.mapper.ContactMapper;
 import com.telran.phonebookapi.service.ContactService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -39,7 +40,7 @@ public class ContactController {
 
     @ApiOperation(value = "Update contact by id", tags = {"edit"})
     @PutMapping("/{id}")
-    public void edit(@RequestBody ContactToEditDto contactToEditDto, @PathVariable(name = "id") long contactId) {
+    public void edit(@RequestBody @Valid ContactToEditDto contactToEditDto, @PathVariable(name = "id") long contactId) {
 
         contactService.editById(contactToEditDto.firstName, contactToEditDto.lastName, contactToEditDto.age,
                 contactToEditDto.isFavorite,
@@ -67,5 +68,15 @@ public class ContactController {
     public void delete(@PathVariable(name = "id") long contactId) {
 
         contactService.deleteById(contactId);
+    }
+
+    @ApiOperation(value = "Get contacts by search", tags = {"search"})
+    @GetMapping("/search")
+    public List<ContactToDisplayDto> searchContactByFirstName(
+            @ApiParam(name = "searchContact", value = "the symbols which contains contacts that user searches")
+            @RequestParam(name = "searchContact",required = true)String name) {
+
+        return contactService.searchByFirst(name).stream()
+                .map(contactMapper::toDto).collect(Collectors.toList());
     }
 }
